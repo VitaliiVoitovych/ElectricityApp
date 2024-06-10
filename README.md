@@ -2,10 +2,10 @@
 The app developed for me(Ukrainian User)
 
 ## Main
-<img style="max-width: 300px" src="/Images/main.jpg">
+<img  src="/Images/main.jpg" width="200">
 
 ## Notes
-<img style="max-width: 300px" src="/Images/notes.jpg">
+<img  src="/Images/notes.jpg" width="200">
 
 ## Add
-<img style="max-width: 300px" src="/Images/add.jpg">
+<img  src="/Images/add.jpg" width="200">
