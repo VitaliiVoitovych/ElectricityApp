@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmolels="clr-namespace:ElectricityApp.ViewModels"
+             xmlns:controls="clr-namespace:ElectricityApp.Controls"
+             x:Class="ElectricityApp.Pages.AddPage"
+             x:DataType="viewmolels:AddViewModel">
+    <VerticalStackLayout
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+        <DatePicker Date="{Binding Date}"></DatePicker>
+        <Label
+            Text="Спожито вдень"/>
+        <controls:NumberBox
+            Value="{Binding DayKilowattConsumed, Mode=TwoWay}"
+            Minimum="0"
+            Maximum="10000"
+            Increment="1"/>
+        
+        <Label
+            Text="Спожито вночі"/>
+        <controls:NumberBox
+            Value="{Binding NightKilowattConsumed, Mode=TwoWay}"
+            Minimum="0"
+            Maximum="10000"
+            Increment="1"/>
+        
+        <Label
+            Text="Ціна за квт/год"/>
+        <controls:NumberBox
+            Value="{Binding KilowattPerHourPrice, Mode=TwoWay}"
+            Minimum="0.01"
+            Maximum="100"
+            Increment=".01"/>
+        
+        <Button
+            HorizontalOptions="End"
+            CornerRadius="10"
+            WidthRequest="150"
+            BackgroundColor="{StaticResource LightDarkGreen}"
+            TextColor="{StaticResource Light}"
+            Text="Додати запис"
+            Command="{Binding AddCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

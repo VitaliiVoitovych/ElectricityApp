@@ -1,0 +1,13 @@
+﻿using ElectricityApp.ViewModels;
+
+namespace ElectricityApp.Pages;
+
+public partial class AddPage : ContentPage
+{
+    public AddPage(AddViewModel vm)
+    {
+        InitializeComponent();
+
+        BindingContext = vm;
+    }
+}

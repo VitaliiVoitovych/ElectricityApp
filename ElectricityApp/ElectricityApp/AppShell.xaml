@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ElectricityApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ElectricityApp"
+    xmlns:pages="clr-namespace:ElectricityApp.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    BackgroundColor="{StaticResource PrimaryDark}"
+    Title="ElectricityApp">
+    <TabBar x:Name="PhoneTabs">
+        <Tab
+            Title="Головна"
+            Icon="chart.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:MainPage}"/>
+        </Tab>
+        <Tab
+            Title="Нотатки"
+            Icon="notes.png">
+            <ShellContent
+                ContentTemplate="{DataTemplate pages:NotesPage}"/>
+        </Tab>
+        <Tab
+            Title="Додати"
+            Icon="add.png">
+            <ShellContent 
+                ContentTemplate="{DataTemplate pages:AddPage}"/>
+        </Tab>
+    </TabBar>
+</Shell>

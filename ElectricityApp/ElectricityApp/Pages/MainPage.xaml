@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ElectricityApp.ViewModels"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             x:Class="ElectricityApp.Pages.MainPage"
+             x:DataType="viewmodels:MainViewModel">
+    <Grid>
+        <ScrollView
+            Margin="15, 0">
+            <Grid
+                RowDefinitions="0.2*,*,0.2*, *">
+                <Label
+                    Text="До оплати"
+                    VerticalTextAlignment="Center"
+                    FontSize="20"
+                    FontAttributes="Bold"/>
+
+                <Frame
+                    Grid.Row="1"
+                    Padding="10"
+                    CornerRadius="15"
+                    Background="Transparent"
+                    BorderColor="{StaticResource LightDarkGreen}">
+                    <lvc:CartesianChart
+                        Grid.Row="1"
+                        Series="{Binding ChartsService.AmountsToPaySeries}"
+                        YAxes="{Binding ChartsService.AmountToPayYAxes}"
+                        XAxes="{Binding ChartsService.DateXAxes}"
+                        ZoomMode="PanX"
+                        LegendPosition="Top"
+                        LegendTextPaint="{Binding ChartsService.LegendTextPaint}"/>
+                </Frame>
+
+                <Label
+                    Grid.Row="2"
+                    Text="Спожито"
+                    VerticalTextAlignment="Center"
+                    FontSize="20"
+                    FontAttributes="Bold"/>
+
+                <Frame
+                    Grid.Row="3"
+                    Padding="10"
+                    CornerRadius="15"
+                    Background="Transparent"
+                    BorderColor="{StaticResource LightDarkGreen}">
+                    <lvc:CartesianChart
+                        Grid.Row="3"
+                        Series="{Binding ChartsService.KilowattConsumedSeries}"
+                        YAxes="{Binding ChartsService.KilowattConsumedYAxes}"
+                        XAxes="{Binding ChartsService.DateXAxes}"
+                        ZoomMode="PanX"
+                        LegendPosition="Top"
+                        LegendTextPaint="{Binding ChartsService.LegendTextPaint}"/>
+                </Frame>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
