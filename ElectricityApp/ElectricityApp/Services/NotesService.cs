@@ -11,7 +11,7 @@ public class NotesService
 
     public ChartsService ChartsService => _chartService;
     public ObservableCollection<ElectricityConsumption> ElectricityConsumptions { get; }
-    
+
     public NotesService(ElectricityDbContext dbContext, ChartsService chartsService)
     {
         ElectricityConsumptions = [];
@@ -31,6 +31,12 @@ public class NotesService
     
     public void AddNote(ElectricityConsumption record)
     {
+        // TODO: Fix this
+        if (
+            ElectricityConsumptions
+                .FirstOrDefault(r => DateOnly.FromDateTime(r.Date).Equals(DateOnly.FromDateTime(record.Date))) is not null)
+            throw new ArgumentException("Запис про цей місяць вже є", nameof(record));
+
         ElectricityConsumptions.Add(record);
         _chartService.AddValues(record);
         _dbContext.ElectricityConsumptions.Add(record);

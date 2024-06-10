@@ -9,7 +9,7 @@
     <VerticalStackLayout
         HorizontalOptions="Center"
         VerticalOptions="Center">
-        <DatePicker Date="{Binding Date}"></DatePicker>
+        <DatePicker Date="{Binding Date}"/>
         <Label
             Text="Спожито вдень"/>
         <controls:NumberBox
