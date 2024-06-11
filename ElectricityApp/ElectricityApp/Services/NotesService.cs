@@ -28,14 +28,13 @@ public class NotesService
             _chartService.AddValues(r);
         }
     }
-    
+
     public void AddNote(ElectricityConsumption record)
     {
         // TODO: Fix this
-        if (
-            ElectricityConsumptions
-                .FirstOrDefault(r => DateOnly.FromDateTime(r.Date).Equals(DateOnly.FromDateTime(record.Date))) is not null)
-            throw new ArgumentException("Запис про цей місяць вже є", nameof(record));
+        if ( ElectricityConsumptions
+                .FirstOrDefault(r => r.Date == record.Date) is not null)
+            throw new ArgumentException("Запис про цей місяць вже є");
 
         ElectricityConsumptions.Add(record);
         _chartService.AddValues(record);
@@ -43,11 +42,12 @@ public class NotesService
         _dbContext.SaveChanges();
     }
 
-    public void RemoveNote(ElectricityConsumption record)
+    public async Task RemoveNote(ElectricityConsumption record)
     {
         ElectricityConsumptions.Remove(record);
-        _chartService.RemoveValues(record);
         _dbContext.ElectricityConsumptions.Remove(record);
         _dbContext.SaveChanges();
+
+        await _chartService.UpdateValues(ElectricityConsumptions);
     }
 }

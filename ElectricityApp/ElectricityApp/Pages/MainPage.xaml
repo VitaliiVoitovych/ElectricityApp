@@ -25,6 +25,7 @@
                             FontSize="20"
                             FontAttributes="Bold"/>
                         <lvc:CartesianChart
+                            x:Name="AmountChart"
                             Grid.Row="1"
                             Series="{Binding ChartsService.AmountsToPaySeries, Mode=TwoWay}"
                             YAxes="{Binding ChartsService.AmountToPayYAxes}"
@@ -49,6 +50,7 @@
                             FontSize="20"
                             FontAttributes="Bold"/>
                         <lvc:CartesianChart
+                            x:Name="KilowattConsumedChart"
                             Grid.Row="1"
                             Series="{Binding ChartsService.KilowattConsumedSeries}"
                             YAxes="{Binding ChartsService.KilowattConsumedYAxes}"

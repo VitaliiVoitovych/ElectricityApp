@@ -10,4 +10,10 @@ public partial class MainPage : ContentPage
 
         BindingContext = vm;
     }
+
+    protected override void OnAppearing()
+    {
+        AmountChart.CoreChart.Update();
+        KilowattConsumedChart.CoreChart.Update();
+    }
 }

@@ -7,7 +7,7 @@ namespace ElectricityApp.ViewModels;
 
 public partial class AddViewModel(NotesService _notesService) : ObservableObject
 {
-    [ObservableProperty] private DateTime _date = DateTime.Now; // TODO: to DateOnly
+    [ObservableProperty] private DateOnly _date = DateOnly.FromDateTime(DateTime.Now);
     [ObservableProperty] private int _dayKilowattConsumed;
     [ObservableProperty] private int _nightKilowattConsumed;
     [ObservableProperty] private decimal _kilowattPerHourPrice = 4.32m;

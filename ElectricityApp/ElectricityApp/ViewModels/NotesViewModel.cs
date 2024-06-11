@@ -10,8 +10,8 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     public NotesService NotesService => _notesService;
 
     [RelayCommand]
-    private void Remove(ElectricityConsumption record)
+    private async Task Remove(ElectricityConsumption record)
     {
-        NotesService.RemoveNote(record);
+        await NotesService.RemoveNote(record);
     }
 }

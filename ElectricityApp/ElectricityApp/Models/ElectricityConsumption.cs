@@ -1,7 +1,7 @@
 ﻿namespace ElectricityApp.Models;
 
 public record ElectricityConsumption(
-    DateTime Date,
+    DateOnly Date,
     int DayKilowattConsumed,
     int NightKilowattConsumed,
     decimal AmountToPay

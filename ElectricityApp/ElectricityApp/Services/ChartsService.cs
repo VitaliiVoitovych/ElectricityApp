@@ -15,20 +15,28 @@ public class ChartsService
     private readonly ObservableCollection<int> _nightKilowattConsumed = [];
     private readonly ObservableCollection<string> _dateLabels = [];
     
+    public async Task UpdateValues(ObservableCollection<ElectricityConsumption> electricityConsumptions)
+    {
+        await Task.Run(() =>
+        {
+            _amountsToPayValues.Clear();
+            _dayKilowattConsumed.Clear();
+            _nightKilowattConsumed.Clear();
+            _dateLabels.Clear();
+
+            foreach (var r in electricityConsumptions)
+            {
+                AddValues(r);
+            }
+        });
+    }
+
     public void AddValues(ElectricityConsumption record)
     {
         _dateLabels.Add(record.Date.ToString("MMM yyyy"));
         _dayKilowattConsumed.Add(record.DayKilowattConsumed);
         _nightKilowattConsumed.Add(record.NightKilowattConsumed);
         _amountsToPayValues.Add(record.AmountToPay);
-    }
-
-    public void RemoveValues(ElectricityConsumption record)
-    {
-        _dateLabels.Remove(record.Date.ToString("MMM yyyy"));
-        _dayKilowattConsumed.Remove(record.DayKilowattConsumed);
-        _nightKilowattConsumed.Remove(record.NightKilowattConsumed);
-        _amountsToPayValues.Remove(record.AmountToPay);
     }
     
     public IEnumerable<ISeries> AmountsToPaySeries =>
