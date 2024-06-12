@@ -30,9 +30,7 @@
                             Series="{Binding ChartsService.AmountsToPaySeries, Mode=TwoWay}"
                             YAxes="{Binding ChartsService.AmountToPayYAxes}"
                             XAxes="{Binding ChartsService.DateXAxes}"
-                            ZoomMode="PanX"
-                            LegendPosition="Top"
-                            LegendTextPaint="{Binding ChartsService.LegendTextPaint}"/>
+                            ZoomMode="PanX"/>
                     </Grid>
                 </Frame>
                 

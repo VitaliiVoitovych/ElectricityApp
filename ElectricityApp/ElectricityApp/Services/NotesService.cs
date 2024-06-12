@@ -31,9 +31,8 @@ public class NotesService
 
     public void AddNote(ElectricityConsumption record)
     {
-        // TODO: Fix this
         if ( ElectricityConsumptions
-                .FirstOrDefault(r => r.Date == record.Date) is not null)
+                .FirstOrDefault(r => EqualsYearAndMonth(r.Date, record.Date)) is not null)
             throw new ArgumentException("Запис про цей місяць вже є");
 
         ElectricityConsumptions.Add(record);
@@ -49,5 +48,10 @@ public class NotesService
         _dbContext.SaveChanges();
 
         await _chartService.UpdateValues(ElectricityConsumptions);
+    }
+
+    private bool EqualsYearAndMonth(DateOnly date1, DateOnly date2)
+    {
+        return (date1.Year, date1.Month) == (date2.Year, date2.Month);
     }
 }

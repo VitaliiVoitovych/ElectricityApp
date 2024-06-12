@@ -1,5 +1,7 @@
 # ElectricityApp
 The app developed for me(Ukrainian User)
+Support only Android(without tablets)
+Work only with day/night mode
 
 ## Main
 <img  src="/Images/main.jpg" width="300">
