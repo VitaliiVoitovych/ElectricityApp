@@ -14,7 +14,7 @@ public class ChartsService
     private readonly ObservableCollection<int> _dayKilowattConsumed = [];
     private readonly ObservableCollection<int> _nightKilowattConsumed = [];
     private readonly ObservableCollection<string> _dateLabels = [];
-    
+
     public async Task UpdateValues(ObservableCollection<ElectricityConsumption> electricityConsumptions)
     {
         await Task.Run(() =>
@@ -115,7 +115,7 @@ public class ChartsService
         }
     ];
 
-    public SolidColorPaint LegendTextPaint { get; set; } = new SolidColorPaint()
+    public SolidColorPaint LegendTextPaint => new SolidColorPaint()
     {
         Color = SKColor.Parse("#abb0b3"),
     };

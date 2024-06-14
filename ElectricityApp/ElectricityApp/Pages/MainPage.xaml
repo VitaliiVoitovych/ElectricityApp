@@ -3,6 +3,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:ElectricityApp.ViewModels"
+             xmlns:views="clr-namespace:ElectricityApp.Views"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
              x:Class="ElectricityApp.Pages.MainPage"
              x:DataType="viewmodels:MainViewModel">
@@ -12,52 +13,23 @@
             <Grid
                 RowDefinitions="*,*"
                 RowSpacing="10">
-                <Frame
-                    Padding="10"
-                    CornerRadius="15"
-                    Background="Transparent"
-                    BorderColor="{StaticResource LightDarkGreen}">
-                    <Grid
-                        RowDefinitions="0.15*, *">
-                        <Label
-                            Text="До оплати:"
-                            VerticalTextAlignment="Center"
-                            FontSize="20"
-                            FontAttributes="Bold"/>
-                        <lvc:CartesianChart
-                            x:Name="AmountChart"
-                            Grid.Row="1"
-                            Series="{Binding ChartsService.AmountsToPaySeries, Mode=TwoWay}"
-                            YAxes="{Binding ChartsService.AmountToPayYAxes}"
-                            XAxes="{Binding ChartsService.DateXAxes}"
-                            ZoomMode="PanX"/>
-                    </Grid>
-                </Frame>
                 
-                <Frame
-                    Grid.Row="3"
-                    Padding="10"
-                    CornerRadius="15"
-                    Background="Transparent"
-                    BorderColor="{StaticResource LightDarkGreen}">
-                    <Grid
-                        RowDefinitions="0.15*, *">
-                        <Label
-                            Text="Споживання"
-                            VerticalTextAlignment="Center"
-                            FontSize="20"
-                            FontAttributes="Bold"/>
-                        <lvc:CartesianChart
-                            x:Name="KilowattConsumedChart"
-                            Grid.Row="1"
-                            Series="{Binding ChartsService.KilowattConsumedSeries}"
-                            YAxes="{Binding ChartsService.KilowattConsumedYAxes}"
-                            XAxes="{Binding ChartsService.DateXAxes}"
-                            ZoomMode="PanX"
-                            LegendPosition="Top"
-                            LegendTextPaint="{Binding ChartsService.LegendTextPaint}"/>
-                    </Grid>
-                </Frame>
+                <views:ChartContainerView
+                    x:Name="AmountToPayChart"
+                    Text="До оплати"
+                    Series="{Binding ChartsService.AmountsToPaySeries}"
+                    XAxes="{Binding ChartsService.DateXAxes}"
+                    YAxes="{Binding ChartsService.AmountToPayYAxes}"/>
+
+                <views:ChartContainerView
+                    x:Name="KilowattConsumedChart"
+                    Grid.Row="1"
+                    Text="Споживання"
+                    Series="{Binding ChartsService.KilowattConsumedSeries}"
+                    XAxes="{Binding ChartsService.DateXAxes}"
+                    YAxes="{Binding ChartsService.KilowattConsumedYAxes}"
+                    LegendPosition="Top"
+                    LegendTextPaint="{Binding ChartsService.LegendTextPaint}"/>
             </Grid>
         </ScrollView>
     </Grid>

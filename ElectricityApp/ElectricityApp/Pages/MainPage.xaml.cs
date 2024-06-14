@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
 
     protected override void OnAppearing()
     {
-        AmountChart.CoreChart.Update();
-        KilowattConsumedChart.CoreChart.Update();
+        AmountToPayChart.UpdateChart();
+        KilowattConsumedChart.UpdateChart();
     }
 }

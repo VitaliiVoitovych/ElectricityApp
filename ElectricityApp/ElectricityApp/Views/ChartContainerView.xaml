@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:ElectricityApp.Views"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             x:Class="ElectricityApp.Views.ChartContainerView"
+             x:Name="This">
+    <Frame
+        Padding="10"
+        CornerRadius="15"
+        Background="Transparent"
+        BorderColor="{StaticResource LightDarkGreen}"
+        BindingContext="{Binding Source={x:Reference This}}">
+
+        <Grid
+            RowDefinitions="0.15*, *">
+
+            <Label
+                Text="{Binding Text}"
+                VerticalTextAlignment="Center"
+                FontSize="20"
+                FontAttributes="Bold"/>
+            <lvc:CartesianChart
+                Grid.Row="1"
+                x:Name="Chart"
+                ZoomMode="PanX"
+                Series="{Binding Series}"
+                XAxes="{Binding XAxes}"
+                YAxes="{Binding YAxes}"
+                LegendPosition="{Binding LegendPosition}"
+                LegendTextPaint="{Binding LegendTextPaint}"/>
+        </Grid>
+    </Frame>
+</ContentView>
