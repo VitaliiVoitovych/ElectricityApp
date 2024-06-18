@@ -2,12 +2,12 @@
 
 namespace ElectricityApp.EfStructures;
 
-public static class Extensions
+public static class DbExtensions
 {
-    public static IServiceCollection AddElectricityDbContext(this IServiceCollection services)
+    public static IServiceCollection AddElectricityDbContext(this IServiceCollection services, string databaseName)
     {
         var connectionString =
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "electricity.db");
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), databaseName);
 
         services.AddDbContext<ElectricityDbContext>(options =>
             options.UseSqlite($"Data Source={connectionString}"));

@@ -13,13 +13,19 @@
         BindingContext="{Binding Source={x:Reference This}}">
 
         <Grid
-            RowDefinitions="0.15*, *">
+            RowDefinitions="Auto, *">
 
-            <Label
-                Text="{Binding Text}"
-                VerticalTextAlignment="Center"
-                FontSize="20"
-                FontAttributes="Bold"/>
+            <VerticalStackLayout>
+                <Label
+                    Text="{Binding Text}"
+                    VerticalTextAlignment="Center"
+                    FontSize="20"/>
+                <Label
+                    Text="{Binding AverageValue}"
+                    VerticalTextAlignment="Center"
+                    FontSize="22"
+                    FontAttributes="Bold"/>
+            </VerticalStackLayout>
             <lvc:CartesianChart
                 Grid.Row="1"
                 x:Name="Chart"

@@ -17,6 +17,14 @@ public partial class ChartContainerView : ContentView
 		set => SetValue(TextProperty, value);
 	}
 
+    public static readonly BindableProperty AverageValueProperty =
+        BindableProperty.Create(nameof(AverageValue), typeof(string), typeof(ChartContainerView), default);
+
+    public string AverageValue
+    {
+        get => (string)GetValue(AverageValueProperty);
+        set => SetValue(AverageValueProperty, value);
+    }
 
     public static readonly BindableProperty SeriesProperty =
         BindableProperty.Create(nameof(Series), typeof(IEnumerable<ISeries>), typeof(ChartContainerView), default);

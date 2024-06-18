@@ -24,7 +24,7 @@ public static class MauiProgramExtensions
         builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddElectricityDbContext();
+        builder.Services.AddElectricityDbContext("electricity.db");
 
         builder.Services.AddSingleton<ChartsService>();
         builder.Services.AddSingleton<NotesService>();
