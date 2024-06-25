@@ -23,5 +23,9 @@
         <Setter Property="HorizontalScrollBarVisibility" Value="Never"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
     </Style>
+
+    <Style TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource Light}"/>
+    </Style>
     
 </ResourceDictionary>

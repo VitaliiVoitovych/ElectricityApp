@@ -18,7 +18,7 @@
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout
                         Orientation="Vertical"
-                        ItemSpacing="10"/>
+                        ItemSpacing="12"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ElectricityConsumption">
@@ -37,8 +37,8 @@
                                 Padding="10">
                             
                                 <Grid
-                                    RowDefinitions="0.4*, *"
-                                    ColumnDefinitions="*, 0.5*"
+                                    RowDefinitions="Auto, *"
+                                    ColumnDefinitions="*, Auto"
                                     RowSpacing="5">
                                     
                                     <Label

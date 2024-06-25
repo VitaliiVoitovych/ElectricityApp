@@ -12,7 +12,7 @@
             Margin="15, 5">
             <Grid
                 RowDefinitions="*,*"
-                RowSpacing="10">
+                RowSpacing="15">
                 
                 <views:ChartContainerView
                     x:Name="AmountToPayChart"
