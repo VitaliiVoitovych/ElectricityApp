@@ -22,6 +22,7 @@ public partial class AddViewModel(NotesService _notesService) : ObservableObject
         try
         {
             _notesService.AddNote(record);
+            Date = Date.AddMonths(1);
         }
         catch (ArgumentException ex)
         {

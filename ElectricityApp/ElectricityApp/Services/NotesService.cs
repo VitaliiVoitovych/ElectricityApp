@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using ElectricityApp.EfStructures;
 using ElectricityApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElectricityApp.Services;
 
@@ -26,7 +27,8 @@ public partial class NotesService : ObservableObject
 
     private async Task LoadData()
     {
-        await foreach (var r in _dbContext.ElectricityConsumptions.AsAsyncEnumerable())
+        var electricityConsumption = await _dbContext.ElectricityConsumptions.OrderBy(e => e.Date).ToListAsync();
+        foreach (var r in electricityConsumption)
         {
             ElectricityConsumptions.Add(r);
             _chartService.AddValues(r);
@@ -35,7 +37,7 @@ public partial class NotesService : ObservableObject
         UpdateAverageValues();
     }
 
-    public void AddNote(ElectricityConsumption record)
+    public async Task AddNote(ElectricityConsumption record)
     {
         if ( ElectricityConsumptions
                 .FirstOrDefault(r => EqualsYearAndMonth(r.Date, record.Date)) is not null)
@@ -46,7 +48,15 @@ public partial class NotesService : ObservableObject
         _dbContext.ElectricityConsumptions.Add(record);
         _dbContext.SaveChanges();
 
+        var electricityConsumption = ElectricityConsumptions.OrderBy(e => e.Date).ToList();
+        ElectricityConsumptions.Clear();
+        foreach (var r in electricityConsumption)
+        {
+            ElectricityConsumptions.Add(r);
+        }
+
         UpdateAverageValues();
+        await _chartService.UpdateValues(ElectricityConsumptions);
     }
 
     public async Task RemoveNote(ElectricityConsumption record)
