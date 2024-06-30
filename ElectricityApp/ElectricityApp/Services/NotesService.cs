@@ -22,51 +22,53 @@ public partial class NotesService : ObservableObject
         ElectricityConsumptions = [];
         _dbContext = dbContext;
         _chartService = chartsService;
-        Task.Run(LoadData);
+        Task.Run(LoadDataAsync);
     }
 
-    private async Task LoadData()
+    private async Task LoadDataAsync()
     {
         var electricityConsumption = await _dbContext.ElectricityConsumptions.OrderBy(e => e.Date).ToListAsync();
         foreach (var r in electricityConsumption)
         {
             ElectricityConsumptions.Add(r);
-            _chartService.AddValues(r);
         }
 
         UpdateAverageValues();
+        await _chartService.UpdateValues(ElectricityConsumptions);
     }
 
-    public async Task AddNote(ElectricityConsumption record)
+    public async Task AddNoteAsync(ElectricityConsumption record)
     {
-        if ( ElectricityConsumptions
-                .FirstOrDefault(r => EqualsYearAndMonth(r.Date, record.Date)) is not null)
+        if ( ElectricityConsumptions.Any(r => EqualsYearAndMonth(r.Date, record.Date)))
             throw new ArgumentException("Запис про цей місяць вже є");
 
         ElectricityConsumptions.Add(record);
-        _chartService.AddValues(record);
         _dbContext.ElectricityConsumptions.Add(record);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
 
-        var electricityConsumption = ElectricityConsumptions.OrderBy(e => e.Date).ToList();
-        ElectricityConsumptions.Clear();
-        foreach (var r in electricityConsumption)
-        {
-            ElectricityConsumptions.Add(r);
-        }
+        SortElectricityConsumptions();
+        UpdateAverageValues();
+        await _chartService.UpdateValues(ElectricityConsumptions);
+    }
+
+    public async Task RemoveNoteAsync(ElectricityConsumption record)
+    {
+        ElectricityConsumptions.Remove(record);
+        _dbContext.ElectricityConsumptions.Remove(record);
+        await _dbContext.SaveChangesAsync();
 
         UpdateAverageValues();
         await _chartService.UpdateValues(ElectricityConsumptions);
     }
 
-    public async Task RemoveNote(ElectricityConsumption record)
+    private void SortElectricityConsumptions()
     {
-        ElectricityConsumptions.Remove(record);
-        _dbContext.ElectricityConsumptions.Remove(record);
-        _dbContext.SaveChanges();
-
-        UpdateAverageValues();
-        await _chartService.UpdateValues(ElectricityConsumptions);
+        var sortedList = ElectricityConsumptions.OrderBy(e => e.Date).ToList();
+        ElectricityConsumptions.Clear();
+        foreach (var r in sortedList)
+        {
+            ElectricityConsumptions.Add(r);
+        }
     }
 
     private bool EqualsYearAndMonth(DateOnly date1, DateOnly date2)

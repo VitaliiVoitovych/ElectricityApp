@@ -31,7 +31,7 @@ public class ChartsService
         });
     }
 
-    public void AddValues(ElectricityConsumption record)
+    private void AddValues(ElectricityConsumption record)
     {
         _dateLabels.Add(record.Date.ToString("MMM yyyy"));
         _dayKilowattConsumed.Add(record.DayKilowattConsumed);

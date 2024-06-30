@@ -10,9 +10,9 @@
         HorizontalOptions="Center"
         VerticalOptions="Center">
         <Grid
-            ColumnDefinitions="*, *, *">
+            ColumnDefinitions="*, 0.5*, 0.5*">
             <Label
-                Text="Обрати дату"
+                Text="Обрати місяць та рік"
                 VerticalTextAlignment="Center"/>
             <Picker
                 Grid.Column="1"

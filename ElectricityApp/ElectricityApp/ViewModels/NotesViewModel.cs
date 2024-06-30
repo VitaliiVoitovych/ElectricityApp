@@ -12,6 +12,6 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     [RelayCommand]
     private async Task Remove(ElectricityConsumption record)
     {
-        await NotesService.RemoveNote(record);
+        await NotesService.RemoveNoteAsync(record);
     }
 }

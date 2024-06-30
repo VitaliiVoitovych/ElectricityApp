@@ -33,7 +33,9 @@ public partial class AddViewModel(NotesService _notesService) : ObservableObject
         var record = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], 1), DayKilowattConsumed, NightKilowattConsumed, amountToPlay);
         try
         {
-            await _notesService.AddNote(record);
+            await _notesService.AddNoteAsync(record);
+            var monthNumber = _months.First(m => m.Key.Equals(SelectedMonth)).Value;
+            SelectedMonth = _months.First(m => m.Value == monthNumber + 1).Key;
         }
         catch (ArgumentException ex)
         {
