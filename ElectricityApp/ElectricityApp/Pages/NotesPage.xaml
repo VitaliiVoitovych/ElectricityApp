@@ -8,8 +8,29 @@
              x:DataType="viewmodels:NotesViewModel"
              x:Name="FavouritePage">
     <Grid
-        Margin="0,7,0,0">
+        Margin="0,7,0,0"
+        RowDefinitions="Auto, *">
+
+        <HorizontalStackLayout
+            Margin="15, 7"
+            HorizontalOptions="End"
+            Spacing="10">
+
+            <ImageButton
+                Source="upload.png"
+                WidthRequest="24"
+                HeightRequest="24"
+                Command="{Binding UploadDataToFileCommand}"/>
+            <ImageButton
+                Source="load.png"
+                WidthRequest="24"
+                HeightRequest="24"
+                Command="{Binding LoadDataFromFileCommand}"/>
+
+        </HorizontalStackLayout>
+        
         <ScrollView
+            Grid.Row="1"
             Margin="15, 0">
             
             <CollectionView

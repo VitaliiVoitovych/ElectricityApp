@@ -1,4 +1,5 @@
-﻿using ElectricityApp.EfStructures;
+﻿using CommunityToolkit.Maui;
+using ElectricityApp.EfStructures;
 using ElectricityApp.Pages;
 using ElectricityApp.Services;
 using ElectricityApp.ViewModels;
@@ -13,6 +14,7 @@ public static class MauiProgramExtensions
     {
         builder
             .UseSkiaSharp(true)
+            .UseMauiCommunityToolkit()
             .UseMauiApp<App>()
             .ConfigureFonts(fonts =>
             {
