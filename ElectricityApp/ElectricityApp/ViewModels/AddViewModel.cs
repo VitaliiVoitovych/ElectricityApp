@@ -35,7 +35,15 @@ public partial class AddViewModel(NotesService _notesService) : ObservableObject
         {
             await _notesService.AddNoteAsync(record);
             var monthNumber = _months.First(m => m.Key.Equals(SelectedMonth)).Value;
-            SelectedMonth = _months.First(m => m.Value == monthNumber + 1).Key;
+            if (monthNumber == 12)
+            {
+                SelectedMonth = _months.First().Key;
+                SelectedYear++;
+            }
+            else
+            {
+                SelectedMonth = _months.First(m => m.Value == monthNumber + 1).Key;
+            }
         }
         catch (ArgumentException ex)
         {
