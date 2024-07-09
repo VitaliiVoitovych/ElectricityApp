@@ -8,9 +8,30 @@
              x:DataType="viewmodels:NotesViewModel"
              x:Name="FavouritePage">
     <Grid
-        Margin="0,7,0,0">
+        Margin="15,7,15,0"
+        RowDefinitions="Auto, *"
+        RowSpacing="10">
+
+        <HorizontalStackLayout
+            HorizontalOptions="End"
+            Spacing="10">
+
+            <ImageButton
+                Source="upload.png"
+                HeightRequest="24"
+                WidthRequest="24"
+                Command="{Binding UploadToFileCommand}"/>
+
+            <ImageButton
+                Source="load.png"
+                HeightRequest="24"
+                WidthRequest="24"
+                Command="{Binding LoadFromFileCommand}"/>
+            
+        </HorizontalStackLayout>
+        
         <ScrollView
-            Margin="15, 0">
+            Grid.Row="1">
             
             <CollectionView
                 ItemsSource="{Binding NotesService.ElectricityConsumptions}">
