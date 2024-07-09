@@ -1,4 +1,7 @@
-﻿using ElectricityApp.EfStructures;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Views;
+using ElectricityApp.Controls;
+using ElectricityApp.EfStructures;
 using ElectricityApp.Pages;
 using ElectricityApp.Services;
 using ElectricityApp.ViewModels;
@@ -14,10 +17,17 @@ public static class MauiProgramExtensions
         builder
             .UseSkiaSharp(true)
             .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+            })
+            .ConfigureEssentials(essentials =>
+            {
+                essentials
+                    .AddAppAction("share_app", "Поділитися", icon: "qr_code")
+                    .OnAppAction(HandleAppActions);
             });
         
 #if DEBUG
@@ -38,5 +48,10 @@ public static class MauiProgramExtensions
         builder.Services.AddTransient<AddPage>();
         
         return builder;
+    }
+
+    private static void HandleAppActions(AppAction action)
+    {
+        Application.Current?.MainPage?.ShowPopup(new QRCodePopup());
     }
 }
