@@ -1,11 +1,7 @@
-﻿using CommunityToolkit.Maui;
-using CommunityToolkit.Maui.Views;
-using ElectricityApp.Controls;
-using ElectricityApp.EfStructures;
+﻿using ElectricityApp.EfStructures;
 using ElectricityApp.Pages;
 using ElectricityApp.Services;
 using ElectricityApp.ViewModels;
-using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace ElectricityApp;
@@ -17,7 +13,6 @@ public static class MauiProgramExtensions
         builder
             .UseSkiaSharp(true)
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -42,16 +37,22 @@ public static class MauiProgramExtensions
         builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<NotesViewModel>();
         builder.Services.AddTransient<AddViewModel>();
+        builder.Services.AddSingleton<QrCodeViewModel>();
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<NotesPage>();
         builder.Services.AddTransient<AddPage>();
+        builder.Services.AddTransient<QrCodePage>();
         
         return builder;
     }
 
     private static void HandleAppActions(AppAction action)
     {
-        Application.Current?.MainPage?.ShowPopup(new QRCodePopup());
+        Application.Current?.Dispatcher.Dispatch(async () =>
+        {
+            await Task.Delay(250);
+            await Shell.Current.GoToAsync($"{nameof(QrCodePage)}", true);
+        });
     }
 }
