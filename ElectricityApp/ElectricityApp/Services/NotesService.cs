@@ -37,6 +37,16 @@ public partial class NotesService : ObservableObject
         await _chartService.UpdateValues(ElectricityConsumptions);
     }
 
+    public async Task ClearAsync()
+    {
+        var electricityConsumptions = ElectricityConsumptions.ToList();
+
+        foreach (var record in electricityConsumptions)
+        {
+            await RemoveNoteAsync(record);
+        }
+    }
+
     public async Task AddNoteAsync(ElectricityConsumption record)
     {
         if ( ElectricityConsumptions.Any(r => EqualsYearAndMonth(r.Date, record.Date)))

@@ -36,6 +36,7 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     {
         var options = new PickOptions()
         {
+            PickerTitle = "Виберіть файл з даними (electricity.json)",
             FileTypes = new FilePickerFileType(
                 new Dictionary<DevicePlatform, IEnumerable<string>>
                 {
@@ -45,19 +46,25 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
 
         try
         {
-            var result = await FilePicker.Default.PickAsync(options);
-            var stream = await result?.OpenReadAsync()!;
-
+            var result = await FilePicker.Default.PickAsync(options) ?? throw new FileNotFoundException("Ви не обрали файл!");
+            var stream = await result.OpenReadAsync();
 
             var content = JsonSerializer.Deserialize<IAsyncEnumerable<ElectricityConsumption>>(stream)!;
+
+            await NotesService.ClearAsync();
 
             await foreach (var item in content)
             {
                 await _notesService.AddNoteAsync(item);
             }
         }
-        catch (Exception)
+        catch (FileNotFoundException ex)
         {
+            await Shell.Current.DisplayAlert("Помилка!", ex.Message, "Зрозуміло");
+        }
+        catch (JsonException)
+        {
+            await Shell.Current.DisplayAlert("Помилка!", "Ви обрали не файл з даними!", "Зрозуміло");
         }
     }
 }
