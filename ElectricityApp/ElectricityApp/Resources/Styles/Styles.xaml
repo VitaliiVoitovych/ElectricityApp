@@ -27,5 +27,10 @@
     <Style TargetType="Picker">
         <Setter Property="HorizontalTextAlignment" Value="Center"/>
     </Style>
-    
+
+    <Style TargetType="Button">
+        <Setter Property="TextColor" Value="{StaticResource Light}"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource LightDarkGreen}"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
 </ResourceDictionary>
