@@ -20,13 +20,13 @@
                 Source="upload.png"
                 HeightRequest="24"
                 WidthRequest="24"
-                Command="{Binding UploadToFileCommand}"/>
+                Command="{Binding ExportDataCommand}"/>
 
             <ImageButton
                 Source="load.png"
                 HeightRequest="24"
                 WidthRequest="24"
-                Command="{Binding LoadFromFileCommand}"/>
+                Command="{Binding ImportDataCommand}"/>
             
         </HorizontalStackLayout>
         

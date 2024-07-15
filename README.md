@@ -19,3 +19,9 @@
 
 ### Add
 <img  src="/Images/add.jpg" width="300">
+
+### QrCode Page
+<img src="/Images/qr_code_page.jpg" width="300">
+
+### QrCode App Action
+<img src="/Images/qr_app_action.jpg" width="300">

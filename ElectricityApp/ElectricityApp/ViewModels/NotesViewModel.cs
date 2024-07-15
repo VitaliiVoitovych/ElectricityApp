@@ -17,7 +17,7 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     }
 
     [RelayCommand]
-    private async Task UploadToFile()
+    private async Task ExportData()
     {
         var filename = "electricity.json";
         var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), filename);
@@ -32,7 +32,7 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     }
 
     [RelayCommand]
-    private async Task LoadFromFile()
+    private async Task ImportData()
     {
         var options = new PickOptions()
         {

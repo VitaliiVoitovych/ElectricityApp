@@ -2,6 +2,7 @@
 using ElectricityApp.Pages;
 using ElectricityApp.Services;
 using ElectricityApp.ViewModels;
+using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace ElectricityApp;
