@@ -25,7 +25,7 @@ public static class MauiProgramExtensions
                     .AddAppAction("share_app", "Поділитися", icon: "qr_code")
                     .OnAppAction(HandleAppActions);
             });
-        
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
