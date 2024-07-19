@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using ElectricityApp.Models;
-using LiveChartsCore;
+﻿using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using LiveChartsCore.SkiaSharpView.Painting.Effects;

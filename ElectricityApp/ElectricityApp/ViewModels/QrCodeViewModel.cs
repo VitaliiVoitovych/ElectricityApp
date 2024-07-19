@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using QRCoder;
+﻿using QRCoder;
 
 namespace ElectricityApp.ViewModels;
 
@@ -17,7 +15,7 @@ public partial class QrCodeViewModel : ObservableObject
 
     private static ImageSource CreateQrCode()
     {
-        var version = "1.2.1";
+        var version = "1.2.2";
         var qrGenerator = new QRCodeGenerator();
         var qrCodeData = qrGenerator.CreateQrCode($@"https://github.com/VitaliiVoitovych/ElectricityApp/releases/download/v{version}/ElectricityApp-v{version}.apk", QRCodeGenerator.ECCLevel.Q);
 

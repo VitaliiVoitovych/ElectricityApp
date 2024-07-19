@@ -8,6 +8,16 @@ public static class MauiProgram
     {
         var builder = MauiApp.CreateBuilder();
 
+        AddControlsHandlers();
+
+        builder
+            .UseSharedMauiApp();
+
+        return builder.Build();
+    }
+
+    private static void AddControlsHandlers()
+    {
         EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
         {
             handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.ParseColor("#abb0b3"));
@@ -44,10 +54,5 @@ public static class MauiProgram
             button1!.SetTextColor(textColorList);
             button2!.SetTextColor(textColorList);
         });
-
-        builder
-            .UseSharedMauiApp();
-
-        return builder.Build();
     }
 }

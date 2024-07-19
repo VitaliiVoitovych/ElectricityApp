@@ -1,6 +1,4 @@
-﻿using ElectricityApp.ViewModels;
-
-namespace ElectricityApp.Pages;
+﻿namespace ElectricityApp.Pages;
 
 public partial class NotesPage : ContentPage
 {

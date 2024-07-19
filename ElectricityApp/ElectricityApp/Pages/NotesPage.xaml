@@ -6,29 +6,39 @@
              xmlns:models="clr-namespace:ElectricityApp.Models"
              x:Class="ElectricityApp.Pages.NotesPage"
              x:DataType="viewmodels:NotesViewModel"
-             x:Name="FavouritePage">
+             x:Name="Notes">
     <Grid
         Margin="15,7,15,0"
         RowDefinitions="Auto, *"
         RowSpacing="10">
 
-        <HorizontalStackLayout
-            HorizontalOptions="End"
-            Spacing="10">
+        <Grid>
 
             <ImageButton
-                Source="upload.png"
+                HorizontalOptions="Start"
+                Source="qr_code.png"
                 HeightRequest="24"
                 WidthRequest="24"
-                Command="{Binding ExportDataCommand}"/>
+                Command="{Binding GoToQrCodeCommand}"/>
 
-            <ImageButton
-                Source="load.png"
-                HeightRequest="24"
-                WidthRequest="24"
-                Command="{Binding ImportDataCommand}"/>
-            
-        </HorizontalStackLayout>
+            <HorizontalStackLayout
+                HorizontalOptions="End"
+                Spacing="10">
+
+                <ImageButton
+                    Source="upload.png"
+                    HeightRequest="24"
+                    WidthRequest="24"
+                    Command="{Binding ExportDataCommand}"/>
+
+                <ImageButton
+                    Source="load.png"
+                    HeightRequest="24"
+                    WidthRequest="24"
+                    Command="{Binding ImportDataCommand}"/>
+
+            </HorizontalStackLayout>
+        </Grid>
         
         <ScrollView
             Grid.Row="1">
@@ -48,7 +58,7 @@
                                 <SwipeItem
                                     IconImageSource="cross.png"
                                     BackgroundColor="Transparent"
-                                    Command="{Binding BindingContext.RemoveCommand, Source={x:Reference FavouritePage}}"
+                                    Command="{Binding BindingContext.RemoveCommand, Source={x:Reference Notes}}"
                                     CommandParameter="{Binding .}"/>
                             </SwipeView.RightItems>
                         

@@ -1,5 +1,4 @@
-﻿using ElectricityApp.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ElectricityApp.EfStructures;
 

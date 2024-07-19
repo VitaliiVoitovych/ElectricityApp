@@ -1,7 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using ElectricityApp.EfStructures;
-using ElectricityApp.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectricityApp.Services;
@@ -9,9 +7,9 @@ namespace ElectricityApp.Services;
 public partial class NotesService : ObservableObject
 {
     private readonly ElectricityDbContext _dbContext;
-    private readonly ChartsService _chartService;
+    private readonly ChartsService _chartsService;
 
-    public ChartsService ChartsService => _chartService;
+    public ChartsService ChartsService => _chartsService;
     public ObservableCollection<ElectricityConsumption> ElectricityConsumptions { get; }
 
     [ObservableProperty] private decimal _averageAmount;
@@ -21,7 +19,7 @@ public partial class NotesService : ObservableObject
     {
         ElectricityConsumptions = [];
         _dbContext = dbContext;
-        _chartService = chartsService;
+        _chartsService = chartsService;
         Task.Run(LoadDataAsync);
     }
 
@@ -34,7 +32,7 @@ public partial class NotesService : ObservableObject
         }
 
         UpdateAverageValues();
-        await _chartService.UpdateValues(ElectricityConsumptions);
+        await ChartsService.UpdateValues(ElectricityConsumptions);
     }
 
     public async Task ClearAsync()
@@ -58,7 +56,7 @@ public partial class NotesService : ObservableObject
 
         SortElectricityConsumptions();
         UpdateAverageValues();
-        await _chartService.UpdateValues(ElectricityConsumptions);
+        await ChartsService.UpdateValues(ElectricityConsumptions);
     }
 
     public async Task RemoveNoteAsync(ElectricityConsumption record)
@@ -68,7 +66,7 @@ public partial class NotesService : ObservableObject
         await _dbContext.SaveChangesAsync();
 
         UpdateAverageValues();
-        await _chartService.UpdateValues(ElectricityConsumptions);
+        await ChartsService.UpdateValues(ElectricityConsumptions);
     }
 
     private void SortElectricityConsumptions()

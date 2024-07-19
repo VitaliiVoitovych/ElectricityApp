@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ElectricityApp.Services;
-
-namespace ElectricityApp.ViewModels;
+﻿namespace ElectricityApp.ViewModels;
 
 public partial class MainViewModel(NotesService _notesService) : ObservableObject
 {

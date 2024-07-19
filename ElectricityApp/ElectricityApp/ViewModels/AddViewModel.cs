@@ -1,9 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using ElectricityApp.Models;
-using ElectricityApp.Services;
-
-namespace ElectricityApp.ViewModels;
+﻿namespace ElectricityApp.ViewModels;
 
 public partial class AddViewModel(NotesService _notesService) : ObservableObject
 {
@@ -27,27 +22,32 @@ public partial class AddViewModel(NotesService _notesService) : ObservableObject
     [RelayCommand]
     private async Task Add()
     {
-        var amountToPlay = 
+        var amountToPay = 
             DayKilowattConsumed * KilowattPerHourPrice + NightKilowattConsumed * (KilowattPerHourPrice * 0.5m);
 
-        var record = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], 1), DayKilowattConsumed, NightKilowattConsumed, amountToPlay);
+        var record = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], 1), DayKilowattConsumed, NightKilowattConsumed, amountToPay);
         try
         {
             await _notesService.AddNoteAsync(record);
-            var monthNumber = _months.First(m => m.Key.Equals(SelectedMonth)).Value;
-            if (monthNumber == 12)
-            {
-                SelectedMonth = _months.First().Key;
-                SelectedYear++;
-            }
-            else
-            {
-                SelectedMonth = _months.First(m => m.Value == monthNumber + 1).Key;
-            }
+            ChangeMonthAndYear();
         }
         catch (ArgumentException ex)
         {
             await Shell.Current.DisplayAlert("Помилка!", ex.Message, "Зрозуміло");
+        }
+    }
+
+    private void ChangeMonthAndYear()
+    {
+        var monthNumber = _months.First(m => m.Key.Equals(SelectedMonth)).Value;
+        if (monthNumber == 12)
+        {
+            SelectedMonth = _months.First().Key;
+            SelectedYear++;
+        }
+        else
+        {
+            SelectedMonth = _months.First(m => m.Value == monthNumber + 1).Key;
         }
     }
 }

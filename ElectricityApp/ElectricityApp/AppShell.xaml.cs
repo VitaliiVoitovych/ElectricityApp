@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using ElectricityApp.Pages;
 
 namespace ElectricityApp;
 

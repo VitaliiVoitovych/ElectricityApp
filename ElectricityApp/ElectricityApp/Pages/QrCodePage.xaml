@@ -30,7 +30,6 @@
                 VerticalTextAlignment="Center"/>
 
             <Image
-                x:Name="QrImage"
                 Source="{Binding QrCode}"
                 WidthRequest="250"
                 HeightRequest="250"/>

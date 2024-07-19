@@ -1,5 +1,3 @@
-using ElectricityApp.ViewModels;
-
 namespace ElectricityApp.Pages;
 
 public partial class QrCodePage : ContentPage

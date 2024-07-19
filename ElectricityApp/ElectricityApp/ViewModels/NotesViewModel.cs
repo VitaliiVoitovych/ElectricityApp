@@ -1,8 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using ElectricityApp.Models;
-using ElectricityApp.Services;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace ElectricityApp.ViewModels;
 
@@ -14,6 +10,12 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     private async Task Remove(ElectricityConsumption record)
     {
         await NotesService.RemoveNoteAsync(record);
+    }
+
+    [RelayCommand]
+    private async Task GoToQrCode()
+    {
+        await Shell.Current.GoToAsync($"{nameof(QrCodePage)}", true);
     }
 
     [RelayCommand]
@@ -34,6 +36,24 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     [RelayCommand]
     private async Task ImportData()
     {
+        try
+        {
+            var file = await PickFileAsync();
+            var data = await DeserializeFileAsync(file);
+            await SaveDataAsync(data);
+        }
+        catch (FileNotFoundException ex)
+        {
+            await Shell.Current.DisplayAlert("Помилка!", ex.Message, "Зрозуміло");
+        }
+        catch (JsonException)
+        {
+            await Shell.Current.DisplayAlert("Помилка!", "Ви обрали не файл з даними!", "Зрозуміло");
+        }
+    }
+
+    private async Task<FileResult> PickFileAsync()
+    {
         var options = new PickOptions()
         {
             PickerTitle = "Виберіть файл з даними (electricity.json)",
@@ -44,27 +64,22 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
                 }),
         };
 
-        try
-        {
-            var result = await FilePicker.Default.PickAsync(options) ?? throw new FileNotFoundException("Ви не обрали файл!");
-            var stream = await result.OpenReadAsync();
+        var result = await FilePicker.Default.PickAsync(options) ?? throw new FileNotFoundException("Ви не обрали файл!");
+        return result;
+    }
 
-            var content = JsonSerializer.Deserialize<IAsyncEnumerable<ElectricityConsumption>>(stream)!;
+    private async Task<IAsyncEnumerable<ElectricityConsumption>> DeserializeFileAsync(FileResult file)
+    {
+        var stream = await file.OpenReadAsync();
+        return JsonSerializer.Deserialize<IAsyncEnumerable<ElectricityConsumption>>(stream)!;
+    }
 
-            await NotesService.ClearAsync();
-
-            await foreach (var item in content)
-            {
-                await _notesService.AddNoteAsync(item);
-            }
-        }
-        catch (FileNotFoundException ex)
+    private async Task SaveDataAsync(IAsyncEnumerable<ElectricityConsumption> data)
+    {
+        await NotesService.ClearAsync();
+        await foreach (var item in data)
         {
-            await Shell.Current.DisplayAlert("Помилка!", ex.Message, "Зрозуміло");
-        }
-        catch (JsonException)
-        {
-            await Shell.Current.DisplayAlert("Помилка!", "Ви обрали не файл з даними!", "Зрозуміло");
+            await _notesService.AddNoteAsync(item);
         }
     }
 }
