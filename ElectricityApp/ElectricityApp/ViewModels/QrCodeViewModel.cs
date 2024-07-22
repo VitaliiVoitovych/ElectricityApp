@@ -15,7 +15,7 @@ public partial class QrCodeViewModel : ObservableObject
 
     private static ImageSource CreateQrCode()
     {
-        var version = "1.2.2";
+        var version = "1.2.3";
         var qrGenerator = new QRCodeGenerator();
         var qrCodeData = qrGenerator.CreateQrCode($@"https://github.com/VitaliiVoitovych/ElectricityApp/releases/download/v{version}/ElectricityApp-v{version}.apk", QRCodeGenerator.ECCLevel.Q);
 
