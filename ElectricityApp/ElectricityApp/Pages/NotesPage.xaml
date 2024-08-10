@@ -63,7 +63,8 @@
                             </SwipeView.RightItems>
                         
                             <Frame
-                                Background="{StaticResource MediumDarkGreen}"
+                                BorderColor="{StaticResource LightDarkGreen}"
+                                Background="{StaticResource DarkGreen}"
                                 CornerRadius="15"
                                 Padding="10">
                             
@@ -86,26 +87,26 @@
                                             Padding="2"
                                             VerticalOptions="Center"
                                             Spacing="5">
-                                            <Image
-                                                Source="sun.png"
-                                                HeightRequest="24"
-                                                WidthRequest="24"/>
+                                            <Ellipse
+                                                Fill="#e2e38b"
+                                                HeightRequest="16"
+                                                WidthRequest="16"/>
                                             <Label
                                                 Text="{Binding DayKilowattConsumed,
-                                                        StringFormat='Вдень: {0} кВт/год'}"/>
+                                                        StringFormat='День: {0} кВт/год'}"/>
                                         </HorizontalStackLayout>
                                         
                                         <HorizontalStackLayout
                                             Padding="2"
                                             VerticalOptions="Center"
                                             Spacing="5">
-                                            <Image
-                                                Source="moon.png"
-                                                HeightRequest="20"
-                                                WidthRequest="24"/>
+                                            <Ellipse
+                                                Fill="#29297D"
+                                                HeightRequest="16"
+                                                WidthRequest="16"/>
                                             <Label
                                                 Text="{Binding NightKilowattConsumed,
-                                                        StringFormat='Вночі: {0} кВт/год'}"/>
+                                                        StringFormat='Ніч: {0} кВт/год'}"/>
                                         </HorizontalStackLayout>
                                         
                                     </VerticalStackLayout>

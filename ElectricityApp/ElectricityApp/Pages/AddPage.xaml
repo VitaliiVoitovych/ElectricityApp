@@ -28,7 +28,10 @@
         </Grid>
         
         <Label
-            Text="Спожито вдень"/>
+            Text="Спожито кВт/год"
+            FontSize="18"/>
+        <Label
+            Text="День"/>
         <controls:NumberBox
             Value="{Binding DayKilowattConsumed, Mode=TwoWay}"
             Minimum="0"
@@ -36,7 +39,7 @@
             Increment="1"/>
         
         <Label
-            Text="Спожито вночі"/>
+            Text="Ніч:"/>
         <controls:NumberBox
             Value="{Binding NightKilowattConsumed, Mode=TwoWay}"
             Minimum="0"
@@ -44,7 +47,8 @@
             Increment="1"/>
         
         <Label
-            Text="Ціна за квт/год"/>
+            Text="Ціна за кВт/год"
+            Margin="0,15,0,0"/>
         <controls:NumberBox
             Value="{Binding KilowattPerHourPrice, Mode=TwoWay}"
             Minimum="0.01"
