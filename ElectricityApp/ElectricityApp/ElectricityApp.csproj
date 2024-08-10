@@ -23,7 +23,8 @@
     <ItemGroup>
       <None Remove="Resources\Images\add_action.svg" />
       <None Remove="Resources\Images\left_arrow.svg" />
-      <None Remove="Resources\Images\qr_code.svg" />
+      <None Remove="Resources\Images\qr.svg" />
+      <None Remove="Resources\Images\qr_action.svg" />
     </ItemGroup>
 
     <ItemGroup>
