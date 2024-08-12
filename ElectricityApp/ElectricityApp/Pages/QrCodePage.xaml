@@ -8,13 +8,17 @@
     <Grid
         RowDefinitions="Auto, *">
 
-        <ImageButton
-            HorizontalOptions="Start"
-            Source="left_arrow.png"
-            HeightRequest="32"
-            WidthRequest="32"
-            Margin="10,12,0,0"
-            Command="{Binding GoToBackCommand}"/>
+        <HorizontalStackLayout
+            Background="{StaticResource PrimaryDark}"
+            VerticalOptions="Center"
+            Padding="10">
+            
+            <ImageButton
+                Source="left_arrow.png"
+                HeightRequest="32"
+                WidthRequest="32"
+                Command="{Binding GoToBackCommand}"/>
+        </HorizontalStackLayout>
 
         <VerticalStackLayout
             Grid.Row="1"

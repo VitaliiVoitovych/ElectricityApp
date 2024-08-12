@@ -5,8 +5,15 @@
              xmlns:viewmodels="clr-namespace:ElectricityApp.ViewModels"
              xmlns:views="clr-namespace:ElectricityApp.Views"
              xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ElectricityApp.Pages.MainPage"
              x:DataType="viewmodels:MainViewModel">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior 
+            StatusBarColor="{StaticResource DarkGreen}" 
+            StatusBarStyle="DarkContent"/>
+    </ContentPage.Behaviors>
+
     <Grid>
         <ScrollView
             Margin="15, 5">
