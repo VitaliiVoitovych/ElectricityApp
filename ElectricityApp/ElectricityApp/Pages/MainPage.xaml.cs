@@ -13,5 +13,6 @@ public partial class MainPage : ContentPage
     {
         AmountToPayChart.UpdateChart();
         KilowattConsumedChart.UpdateChart();
+        CommunityToolkit.Maui.Core.Platform.StatusBar.SetColor(Color.FromArgb("#101d24"));
     }
 }
