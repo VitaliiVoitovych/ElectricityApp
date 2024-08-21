@@ -32,90 +32,87 @@
     <Grid
         Margin="15,7,15,0">
 
-        <ScrollView>
-            
-            <CollectionView
-                ItemsSource="{Binding NotesService.ElectricityConsumptions}">
-                
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout
-                        Orientation="Vertical"
-                        ItemSpacing="12"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:ElectricityConsumption">
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItem
-                                    IconImageSource="cross.png"
-                                    BackgroundColor="Transparent"
-                                    Command="{Binding BindingContext.RemoveCommand, Source={x:Reference Notes}}"
-                                    CommandParameter="{Binding .}"/>
-                            </SwipeView.RightItems>
-                        
-                            <Frame
-                                BorderColor="{StaticResource LightDarkGreen}"
-                                Background="{StaticResource DarkGreen}"
-                                CornerRadius="15"
-                                Padding="10">
-                            
-                                <Grid
-                                    RowDefinitions="Auto, *"
-                                    ColumnDefinitions="*, Auto"
-                                    RowSpacing="5">
-                                    
-                                    <Label
-                                        Text="{Binding Date, StringFormat='{0:MMMM yyyy}'}"
-                                        FontAttributes="Bold"
-                                        FontSize="18"
-                                        TextTransform="Uppercase"/>
-                                    <VerticalStackLayout
-                                        Grid.Column="0"
-                                        Grid.Row="1"
-                                        VerticalOptions="Center">
+        <CollectionView
+            ItemsSource="{Binding NotesService.ElectricityConsumptions}">
 
-                                        <HorizontalStackLayout
-                                            Padding="2"
-                                            VerticalOptions="Center"
-                                            Spacing="5">
-                                            <Ellipse
-                                                Fill="#e2e38b"
-                                                HeightRequest="16"
-                                                WidthRequest="16"/>
-                                            <Label
-                                                Text="{Binding DayKilowattConsumed,
-                                                        StringFormat='День: {0} кВт/год'}"/>
-                                        </HorizontalStackLayout>
-                                        
-                                        <HorizontalStackLayout
-                                            Padding="2"
-                                            VerticalOptions="Center"
-                                            Spacing="5">
-                                            <Ellipse
-                                                Fill="#29297D"
-                                                HeightRequest="16"
-                                                WidthRequest="16"/>
-                                            <Label
-                                                Text="{Binding NightKilowattConsumed,
-                                                        StringFormat='Ніч: {0} кВт/год'}"/>
-                                        </HorizontalStackLayout>
-                                        
-                                    </VerticalStackLayout>
-                                    <Label
-                                        Grid.Column="1"
-                                        Grid.RowSpan="2"
-                                        HorizontalOptions="End"
-                                        VerticalTextAlignment="End"
-                                        HorizontalTextAlignment="Center"
-                                        FontSize="18"
-                                        FontAttributes="Bold"
-                                        Text="{Binding AmountToPay, StringFormat='{0:C2}'}"/>
-                                </Grid>
-                            </Frame>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </ScrollView>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout
+                    Orientation="Vertical"
+                    ItemSpacing="12"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ElectricityConsumption">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem
+                                IconImageSource="cross.png"
+                                BackgroundColor="Transparent"
+                                Command="{Binding BindingContext.RemoveCommand, Source={x:Reference Notes}}"
+                                CommandParameter="{Binding .}"/>
+                        </SwipeView.RightItems>
+
+                        <Frame
+                            BorderColor="{StaticResource LightDarkGreen}"
+                            Background="{StaticResource DarkGreen}"
+                            CornerRadius="15"
+                            Padding="10">
+
+                            <Grid
+                                RowDefinitions="Auto, *"
+                                ColumnDefinitions="*, Auto"
+                                RowSpacing="5">
+
+                                <Label
+                                    Text="{Binding Date, StringFormat='{0:MMMM yyyy}'}"
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    TextTransform="Uppercase"/>
+                                <VerticalStackLayout
+                                    Grid.Column="0"
+                                    Grid.Row="1"
+                                    VerticalOptions="Center">
+
+                                    <HorizontalStackLayout
+                                        Padding="2"
+                                        VerticalOptions="Center"
+                                        Spacing="5">
+                                        <Ellipse
+                                            Fill="#e2e38b"
+                                            HeightRequest="16"
+                                            WidthRequest="16"/>
+                                        <Label
+                                            Text="{Binding DayKilowattConsumed,
+                                                    StringFormat='День: {0} кВт/год'}"/>
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout
+                                        Padding="2"
+                                        VerticalOptions="Center"
+                                        Spacing="5">
+                                        <Ellipse
+                                            Fill="#29297D"
+                                            HeightRequest="16"
+                                            WidthRequest="16"/>
+                                        <Label
+                                            Text="{Binding NightKilowattConsumed,
+                                                    StringFormat='Ніч: {0} кВт/год'}"/>
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+                                <Label
+                                    Grid.Column="1"
+                                    Grid.RowSpan="2"
+                                    HorizontalOptions="End"
+                                    VerticalTextAlignment="End"
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    Text="{Binding AmountToPay, StringFormat='{0:C2}'}"/>
+                            </Grid>
+                        </Frame>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
