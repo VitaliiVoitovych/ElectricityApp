@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ElectricityApp.EfStructures;
+﻿using ElectricityApp.EfStructures;
 using Microsoft.EntityFrameworkCore;
 
 namespace ElectricityApp.Services;
