@@ -1,8 +1,9 @@
-﻿namespace ElectricityApp.ViewModels;
+﻿using ElectricityApp.Services.Charting;
 
-public partial class MainViewModel(NotesService _notesService) : ObservableObject
+namespace ElectricityApp.ViewModels;
+
+public partial class MainViewModel(NotesService notesService) : ObservableObject
 {
-    public ChartsService ChartsService => _notesService.ChartsService;
-
-    public NotesService NotesService => _notesService;
+    public NotesService NotesService => notesService;
+    public ChartsService ChartsService => NotesService.ChartsService;
 }

@@ -2,14 +2,14 @@
 
 namespace ElectricityApp.ViewModels;
 
-public partial class NotesViewModel(NotesService _notesService) : ObservableObject
+public partial class NotesViewModel(NotesService notesService) : ObservableObject
 {
-    public NotesService NotesService => _notesService;
+    public NotesService NotesService => notesService;
 
     [RelayCommand]
-    private async Task Remove(ElectricityConsumption record)
+    private void Remove(ElectricityConsumption record)
     {
-        await NotesService.RemoveNoteAsync(record);
+        NotesService.RemoveNote(record);
     }
 
     [RelayCommand]
@@ -40,7 +40,7 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
         {
             var file = await PickFileAsync();
             var data = await DeserializeFileAsync(file);
-            await SaveDataAsync(data);
+            await NotesService.ImportDataAsync(data);
         }
         catch (FileNotFoundException ex)
         {
@@ -77,14 +77,5 @@ public partial class NotesViewModel(NotesService _notesService) : ObservableObje
     {
         var stream = await file.OpenReadAsync();
         return JsonSerializer.Deserialize<IAsyncEnumerable<ElectricityConsumption>>(stream)!;
-    }
-
-    private async Task SaveDataAsync(IAsyncEnumerable<ElectricityConsumption> data)
-    {
-        await NotesService.ClearAsync();
-        await foreach (var item in data)
-        {
-            await _notesService.AddNoteAsync(item);
-        }
     }
 }

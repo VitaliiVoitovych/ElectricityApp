@@ -1,6 +1,6 @@
 ﻿namespace ElectricityApp.ViewModels;
 
-public partial class AddViewModel(NotesService _notesService) : ObservableObject
+public partial class AddViewModel(NotesService notesService) : ObservableObject
 {
     private static readonly Dictionary<string, int> _months = new()
     {
@@ -25,15 +25,15 @@ public partial class AddViewModel(NotesService _notesService) : ObservableObject
         var amountToPay = 
             DayKilowattConsumed * KilowattPerHourPrice + NightKilowattConsumed * (KilowattPerHourPrice * 0.5m);
 
-        var record = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], 1), DayKilowattConsumed, NightKilowattConsumed, amountToPay);
+        var consumption = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], 1), DayKilowattConsumed, NightKilowattConsumed, amountToPay);
         try
         {
-            await _notesService.AddNoteAsync(record);
+            notesService.AddNote(consumption);
             ChangeMonthAndYear();
         }
-        catch (ArgumentException ex)
+        catch (ArgumentException)
         {
-            await Shell.Current.DisplayAlert("Помилка!", ex.Message, "Зрозуміло");
+            await Shell.Current.DisplayAlert("Помилка!", "Запис про цей місяць вже є", "Зрозуміло");
         }
     }
 

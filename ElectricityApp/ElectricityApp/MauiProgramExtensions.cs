@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using ElectricityApp.EfStructures;
+using ElectricityApp.Services.Charting;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
