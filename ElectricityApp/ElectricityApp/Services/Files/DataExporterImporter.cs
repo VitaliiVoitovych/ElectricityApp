@@ -1,7 +1,7 @@
 ﻿using ElectricityApp.Models.Converters;
 using System.Text.Json;
 
-namespace ElectricityApp.Services.Flies;
+namespace ElectricityApp.Services.Files;
 
 public static class DataExporterImporter
 {

@@ -8,27 +8,12 @@
              Shell.PresentationMode="ModalAnimated">
     <ContentPage.Behaviors>
         <toolkit:StatusBarBehavior 
-        StatusBarColor="{StaticResource PrimaryDark}" 
+        StatusBarColor="{StaticResource DarkGreen}" 
         StatusBarStyle="LightContent"/>
     </ContentPage.Behaviors>
 
-    <Grid
-        RowDefinitions="Auto, *">
-
-        <HorizontalStackLayout
-            Background="{StaticResource PrimaryDark}"
-            VerticalOptions="Center"
-            Padding="10">
-            
-            <ImageButton
-                Source="left_arrow.png"
-                HeightRequest="32"
-                WidthRequest="32"
-                Command="{Binding GoToBackCommand}"/>
-        </HorizontalStackLayout>
-
+    <Grid>
         <VerticalStackLayout
-            Grid.Row="1"
             VerticalOptions="Center"
             Padding="10"
             Spacing="15">
@@ -44,6 +29,11 @@
                 Source="{Binding QrCode}"
                 WidthRequest="250"
                 HeightRequest="250"/>
+
+            <Button
+                Text="Назад"
+                WidthRequest="200"
+                Command="{Binding GoToBackCommand}"/>
 
         </VerticalStackLayout>
     </Grid>

@@ -1,4 +1,6 @@
-﻿using ElectricityApp.Services.Flies;
+﻿using ElectricityApp.Services.Files;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Text.Json;
 
 namespace ElectricityApp.ViewModels;
@@ -28,6 +30,14 @@ public partial class NotesViewModel(NotesService notesService, FileService fileS
         await DataExporterImporter.ExportAsync(filePath, NotesService.ElectricityConsumptions);
 
         await fileService.ShareFileAsync(filePath);
+        try
+        {
+            File.Delete(filePath);
+        }
+        catch (Exception ex)
+        {
+            await Shell.Current.DisplayAlert("Помилка", ex.Message, "Зрозуміло");
+        }
     }
 
     [RelayCommand]

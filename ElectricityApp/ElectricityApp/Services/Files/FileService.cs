@@ -1,4 +1,4 @@
-﻿namespace ElectricityApp.Services.Flies;
+﻿namespace ElectricityApp.Services.Files;
 
 public class FileService
 {
