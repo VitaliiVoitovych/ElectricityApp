@@ -2,8 +2,6 @@
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
-using LiveChartsCore.SkiaSharpView.Painting.Effects;
-using SkiaSharp;
 
 namespace ElectricityApp.Services.Charting;
 
@@ -13,22 +11,6 @@ public class ChartsService
     private readonly ObservableCollection<int> _dayKilowattConsumed = [];
     private readonly ObservableCollection<int> _nightKilowattConsumed = [];
     private readonly ObservableCollection<string> _dateLabels = [];
-
-    public async Task UpdateValues(ObservableCollection<ElectricityConsumption> electricityConsumptions)
-    {
-        await Task.Run(() =>
-        {
-            _amountsToPayValues.Clear();
-            _dayKilowattConsumed.Clear();
-            _nightKilowattConsumed.Clear();
-            _dateLabels.Clear();
-
-            foreach (var r in electricityConsumptions)
-            {
-                AddValues(r);
-            }
-        });
-    }
 
     public void AddValues(ElectricityConsumption consumption)
     {

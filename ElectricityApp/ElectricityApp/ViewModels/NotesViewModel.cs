@@ -1,6 +1,4 @@
 ﻿using ElectricityApp.Services.Files;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 using System.Text.Json;
 
 namespace ElectricityApp.ViewModels;
