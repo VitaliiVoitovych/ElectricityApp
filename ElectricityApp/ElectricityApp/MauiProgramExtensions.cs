@@ -1,7 +1,10 @@
 ﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Views;
 using ElectricityApp.EfStructures;
 using ElectricityApp.Services.Charting;
 using ElectricityApp.Services.Files;
+using ElectricityApp.Services.QrCode;
+using ElectricityApp.Views.Popups;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -41,13 +44,11 @@ public static class MauiProgramExtensions
         builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<NotesViewModel>();
         builder.Services.AddTransient<AddViewModel>();
-        builder.Services.AddSingleton<QrCodeViewModel>();
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<NotesPage>();
         builder.Services.AddTransient<AddPage>();
-        builder.Services.AddTransient<QrCodePage>();
-        
+
         return builder;
     }
 
@@ -64,8 +65,8 @@ public static class MauiProgramExtensions
             }
             else
             {
-                await Task.Delay(250);
-                await Shell.Current.GoToAsync($"{nameof(QrCodePage)}", true);
+                var shareQrCodePopup = Popups.GetShareAppQrCodePopup();
+                await Shell.Current.ShowPopupAsync(shareQrCodePopup);
             }
         });
     }

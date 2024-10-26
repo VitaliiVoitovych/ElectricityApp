@@ -1,4 +1,6 @@
-﻿using ElectricityApp.Services.Files;
+﻿using CommunityToolkit.Maui.Views;
+using ElectricityApp.Services.Files;
+using ElectricityApp.Views.Popups;
 using System.Text.Json;
 
 namespace ElectricityApp.ViewModels;
@@ -14,9 +16,10 @@ public partial class NotesViewModel(NotesService notesService, FileService fileS
     }
 
     [RelayCommand]
-    private async Task GoToQrCode()
+    private async Task ShowQrCodePopup()
     {
-        await Shell.Current.GoToAsync($"{nameof(QrCodePage)}", true);
+        var shareAppQrCodePopup = Popups.GetShareAppQrCodePopup();
+        await Shell.Current.ShowPopupAsync(shareAppQrCodePopup);
     }
 
     [RelayCommand]
