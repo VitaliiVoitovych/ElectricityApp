@@ -39,7 +39,7 @@ public partial class AddViewModel(NotesService notesService) : ObservableObject
 
     private void ChangeMonthAndYear()
     {
-        var monthNumber = _months.First(m => m.Key.Equals(SelectedMonth)).Value;
+        var monthNumber = _months[SelectedMonth];
         if (monthNumber == 12)
         {
             SelectedMonth = _months.First().Key;

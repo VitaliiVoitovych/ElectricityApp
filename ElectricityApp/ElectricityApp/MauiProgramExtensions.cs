@@ -3,7 +3,6 @@ using CommunityToolkit.Maui.Views;
 using ElectricityApp.EfStructures;
 using ElectricityApp.Services.Charting;
 using ElectricityApp.Services.Files;
-using ElectricityApp.Services.QrCode;
 using ElectricityApp.Views.Popups;
 using Microsoft.Extensions.Logging;
 using SkiaSharp.Views.Maui.Controls.Hosting;
@@ -65,6 +64,7 @@ public static class MauiProgramExtensions
             }
             else
             {
+                await Task.Delay(250);
                 var shareQrCodePopup = Popups.GetShareAppQrCodePopup();
                 await Shell.Current.ShowPopupAsync(shareQrCodePopup);
             }

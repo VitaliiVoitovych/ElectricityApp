@@ -2,7 +2,7 @@
 
 public class QrCodes
 {
-    private const string Version = "1.2.11";
+    private const string Version = "1.2.12";
     private const string AppDownloadUrl = $@"https://github.com/VitaliiVoitovych/ElectricityApp/releases/download/v{Version}/ElectricityApp-v{Version}.apk";
 
 
