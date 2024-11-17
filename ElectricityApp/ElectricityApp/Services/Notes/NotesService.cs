@@ -1,4 +1,5 @@
 ﻿using ElectricityApp.EfStructures;
+using ElectricityApp.Exceptions;
 using ElectricityApp.Extensions;
 using ElectricityApp.Services.Charting;
 using Microsoft.EntityFrameworkCore;
@@ -59,8 +60,7 @@ public partial class NotesService : ObservableObject
 
     public void AddNote(ElectricityConsumption consumption)
     {
-        if ( ElectricityConsumptions.Any(r => EqualsYearAndMonth(r.Date, consumption.Date)))
-            throw new ArgumentException("A note for this month already exists");
+        DuplicateConsumptionNoteException.ThrowIfDuplicateExists(ElectricityConsumptions, consumption);
 
         var index = ElectricityConsumptions.LastMatchingIndex(c => c.Date < consumption.Date) + 1;
 
@@ -83,11 +83,6 @@ public partial class NotesService : ObservableObject
         _dbContext.SaveChanges();
 
         UpdateAverageValues();
-    }
-
-    private static bool EqualsYearAndMonth(DateOnly date1, DateOnly date2)
-    {
-        return (date1.Year, date1.Month) == (date2.Year, date2.Month);
     }
 
     private void UpdateAverageValues()
