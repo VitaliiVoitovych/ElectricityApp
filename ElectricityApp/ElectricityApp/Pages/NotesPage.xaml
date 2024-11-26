@@ -51,57 +51,50 @@
                                 CommandParameter="{Binding .}"/>
                         </SwipeView.RightItems>
 
-                        <Frame
-                            BorderColor="{StaticResource LightDarkGreen}"
+                        <Border
+                            StrokeShape="RoundRectangle 15,15,15,15"
+                            Stroke="{StaticResource LightDarkGreen}"
                             Background="{StaticResource DarkGreen}"
-                            CornerRadius="15"
                             Padding="10">
 
                             <Grid
-                                RowDefinitions="Auto, *"
-                                ColumnDefinitions="*, Auto"
-                                RowSpacing="5">
+                                RowDefinitions="Auto, *, *"
+                                ColumnDefinitions="Auto, *, Auto"
+                                RowSpacing="3"
+                                ColumnSpacing="3">
 
                                 <Label
+                                    Grid.ColumnSpan="2"
                                     Text="{Binding Date, StringFormat='{0:MMMM yyyy}'}"
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     TextTransform="Uppercase"/>
-                                <VerticalStackLayout
+
+                                <Ellipse
                                     Grid.Column="0"
                                     Grid.Row="1"
-                                    VerticalOptions="Center">
-
-                                    <HorizontalStackLayout
-                                        Padding="2"
-                                        VerticalOptions="Center"
-                                        Spacing="5">
-                                        <Ellipse
-                                            Fill="#e2e38b"
-                                            HeightRequest="16"
-                                            WidthRequest="16"/>
-                                        <Label
-                                            Text="{Binding DayKilowattConsumed,
-                                                    StringFormat='День: {0} кВт/год'}"/>
-                                    </HorizontalStackLayout>
-
-                                    <HorizontalStackLayout
-                                        Padding="2"
-                                        VerticalOptions="Center"
-                                        Spacing="5">
-                                        <Ellipse
-                                            Fill="#29297D"
-                                            HeightRequest="16"
-                                            WidthRequest="16"/>
-                                        <Label
-                                            Text="{Binding NightKilowattConsumed,
-                                                    StringFormat='Ніч: {0} кВт/год'}"/>
-                                    </HorizontalStackLayout>
-
-                                </VerticalStackLayout>
+                                    Fill="#e2e38b"
+                                    HeightRequest="16"
+                                    WidthRequest="16"/>
                                 <Label
                                     Grid.Column="1"
-                                    Grid.RowSpan="2"
+                                    Grid.Row="1"
+                                    Text="{Binding DayKilowattConsumed, StringFormat='День: {0} кВт/год'}"/>
+
+                                <Ellipse
+                                    Grid.Column="0"
+                                    Grid.Row="2"
+                                    Fill="#29297D"
+                                    HeightRequest="16"
+                                    WidthRequest="16"/>
+                                <Label
+                                    Grid.Column="1"
+                                    Grid.Row="2"
+                                    Text="{Binding NightKilowattConsumed, StringFormat='Ніч: {0} кВт/год'}"/>
+                                
+                                <Label
+                                    Grid.Column="2"
+                                    Grid.RowSpan="3"
                                     HorizontalOptions="End"
                                     VerticalTextAlignment="End"
                                     HorizontalTextAlignment="Center"
@@ -109,7 +102,7 @@
                                     FontAttributes="Bold"
                                     Text="{Binding AmountToPay, StringFormat='{0:C2}'}"/>
                             </Grid>
-                        </Frame>
+                        </Border>
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

@@ -3,6 +3,7 @@ using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.Measure;
 using LiveChartsCore.SkiaSharpView.Drawing;
+using ChartPaints = ElectricityApp.Services.Charting.Styles.ChartPaints;
 
 namespace ElectricityApp.Views;
 
@@ -74,6 +75,8 @@ public partial class ChartContainerView : ContentView
     public ChartContainerView()
 	{
 		InitializeComponent();
+		Chart.TooltipTextPaint = ChartPaints.TooltipTextPaint;
+		Chart.TooltipBackgroundPaint = ChartPaints.TooltipBackgroundPaint;
 	}
 
 	public void UpdateChart() => Chart.CoreChart.Update();
