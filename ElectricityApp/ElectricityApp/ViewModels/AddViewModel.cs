@@ -4,6 +4,7 @@ namespace ElectricityApp.ViewModels;
 
 public partial class AddViewModel(NotesService notesService) : ObservableObject
 {
+    // TODO: Remove unused code
     private static readonly Dictionary<string, int> _months = new()
     {
         { "Січень", 1}, { "Лютий" , 2}, { "Березень" , 3}, { "Квітень" , 4},
@@ -21,18 +22,23 @@ public partial class AddViewModel(NotesService notesService) : ObservableObject
     [ObservableProperty] private int _nightKilowattConsumed;
     [ObservableProperty] private decimal _kilowattPerHourPrice = 4.32m;
 
+    // Test
+    [ObservableProperty] private DateOnly _selectedDate = DateOnly.FromDateTime(DateTime.Now);
+
     [RelayCommand]
     private async Task Add()
     {
         var amountToPay = 
             DayKilowattConsumed * KilowattPerHourPrice + NightKilowattConsumed * (KilowattPerHourPrice * 0.5m);
 
-        var consumption = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], DateTime.Now.Day), DayKilowattConsumed, NightKilowattConsumed, amountToPay);
+        //var consumption = new ElectricityConsumption(new DateOnly(SelectedYear, _months[SelectedMonth], DateTime.Now.Day), DayKilowattConsumed, NightKilowattConsumed, amountToPay);
+        var consumption = new ElectricityConsumption(SelectedDate, DayKilowattConsumed, NightKilowattConsumed, amountToPay);
         try
         {
             InvalidConsumptionDataException.ThrowIfDateInvalid(consumption);
             notesService.AddNote(consumption);
-            ChangeMonthAndYear();
+            SelectedDate = SelectedDate.AddMonths(1); // TODO: Rework
+            //ChangeMonthAndYear();
         }
         catch (DuplicateConsumptionNoteException)
         {
