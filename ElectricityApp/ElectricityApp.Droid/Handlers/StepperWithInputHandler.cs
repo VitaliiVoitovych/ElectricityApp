@@ -1,19 +1,15 @@
-﻿using ElectricityApp.Controls;
-using Microsoft.Maui.Handlers;
-using Microsoft.Maui.Platform;
-using TextInputEditText = Google.Android.Material.TextField.TextInputEditText;
+﻿using TextInputEditText = Google.Android.Material.TextField.TextInputEditText;
 using AButton = Android.Widget.Button;
 using ColorStateList = Android.Content.Res.ColorStateList;
 using InputTypes = Android.Text.InputTypes;
 
-#nullable disable
 namespace ElectricityApp.Droid.Handlers;
-// TODO: Review code: control's handler
+
 public class StepperWithInputHandler : StepperHandler
 {
-    protected AButton UpButton { get; private set; }
-    protected AButton DownButton { get; private set; }
-    protected TextInputEditText TextField { get; private set; }
+    protected AButton? UpButton { get; private set; }
+    protected AButton? DownButton { get; private set; }
+    protected TextInputEditText? TextField { get; private set; }
     public new StepperWithInput VirtualView => (StepperWithInput)base.VirtualView;
 
     public static IPropertyMapper<IStepper, IStepperHandler> PropertyMapper = new PropertyMapper<StepperWithInput, StepperWithInputHandler>(ViewHandler.ViewMapper)
@@ -31,8 +27,8 @@ public class StepperWithInputHandler : StepperHandler
     {
         var stepper = base.CreatePlatformView();
 
-        UpButton = (AButton)stepper!.GetChildAt(stepper.ChildCount - 1)!;
-        DownButton = (AButton)stepper!.GetChildAt(stepper.ChildCount - 2)!;
+        UpButton = (AButton)stepper.GetChildAt(stepper.ChildCount - 1)!;
+        DownButton = (AButton)stepper.GetChildAt(stepper.ChildCount - 2)!;
 
         TextField = new TextInputEditText(Context)
         {
@@ -50,7 +46,7 @@ public class StepperWithInputHandler : StepperHandler
 
     }
 
-    public StepperWithInputHandler(IPropertyMapper mapper, CommandMapper commandMapper = null) : base(mapper, commandMapper)
+    public StepperWithInputHandler(IPropertyMapper mapper, CommandMapper? commandMapper = null) : base(mapper, commandMapper)
     {
 
     }
@@ -59,19 +55,19 @@ public class StepperWithInputHandler : StepperHandler
     {
         base.ConnectHandler(platformView);
 
-        TextField.TextChanged += OnEntryTextChanged;
+        TextField!.TextChanged += OnEntryTextChanged;
     }
 
     protected override void DisconnectHandler(MauiStepper platformView)
     {
         base.DisconnectHandler(platformView);
 
-        TextField.TextChanged -= OnEntryTextChanged;
+        TextField!.TextChanged -= OnEntryTextChanged;
     }
 
-    private void OnEntryTextChanged(object sender, Android.Text.TextChangedEventArgs e)
+    private void OnEntryTextChanged(object? sender, Android.Text.TextChangedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(TextField.Text))
+        if (string.IsNullOrWhiteSpace(TextField!.Text))
         {
             VirtualView.Value = 0.0;
             TextField.Text = $"{VirtualView.Value}";
@@ -89,9 +85,9 @@ public class StepperWithInputHandler : StepperHandler
 
     public static void MapValue(StepperWithInputHandler handler, StepperWithInput stepper)
     {
-        handler.PlatformView?.UpdateValue(stepper);
+        handler.PlatformView.UpdateValue(stepper);
 
-        handler.TextField.Text = stepper.Value.ToString();
+        handler.TextField!.Text = stepper.Value.ToString();
     }
 
     public static void MapIncrement(StepperWithInputHandler handler, StepperWithInput stepper)
@@ -100,7 +96,7 @@ public class StepperWithInputHandler : StepperHandler
 
         if (!double.IsInteger(stepper.Increment))
         {
-            handler.TextField.InputType |= InputTypes.NumberFlagDecimal;
+            handler.TextField!.InputType |= InputTypes.NumberFlagDecimal;
             handler.TextField.KeyListener = LocalizedDigitsKeyListener.Create(handler.TextField.InputType);
         }
     }
@@ -108,30 +104,30 @@ public class StepperWithInputHandler : StepperHandler
     private static void MapUnderlineColor(StepperWithInputHandler handler, StepperWithInput stepper)
     {
         // TODO: Text field Cursor styling: Color (Solved. Need Review) | need API 29
-        //handler.TextField.TextCursorDrawable.SetTintList(ColorStateList.ValueOf(stepper.UnderlineColor.ToPlatform()));
-        handler.TextField.BackgroundTintList = ColorStateList.ValueOf(stepper.UnderlineColor.ToPlatform());
+        //handler.TextField!.TextCursorDrawable.SetTintList(ColorStateList.ValueOf(stepper.UnderlineColor.ToPlatform()));
+        handler.TextField!.BackgroundTintList = ColorStateList.ValueOf(stepper.UnderlineColor.ToPlatform());
     }
 
     private static void MapButtonBackgroundColor(StepperWithInputHandler handler, StepperWithInput stepper)
     {
         var buttonBackgroundColor = stepper.ButtonBackgroundColor.ToPlatform();
 
-        handler.UpButton.BackgroundTintList = ColorStateList.ValueOf(buttonBackgroundColor);
-        handler.DownButton.BackgroundTintList = ColorStateList.ValueOf(buttonBackgroundColor);
+        handler.UpButton!.BackgroundTintList = ColorStateList.ValueOf(buttonBackgroundColor);
+        handler.DownButton!.BackgroundTintList = ColorStateList.ValueOf(buttonBackgroundColor);
     }
 
     private static void MapTextColor(StepperWithInputHandler handler, StepperWithInput stepper)
     {
-        handler.TextField.UpdateTextColor(stepper);
+        handler.TextField!.UpdateTextColor(stepper);
     }
 
     private static void MapFont(StepperWithInputHandler handler, StepperWithInput stepper)
     {
         var fontManager = handler.MauiContext?.Services.GetRequiredService<IFontManager>()!;
-        handler.TextField.UpdateFont(stepper, fontManager);
+        handler.TextField!.UpdateFont(stepper, fontManager);
 
-        handler.UpButton.UpdateFont(stepper, fontManager);
-        handler.DownButton.UpdateFont(stepper, fontManager);
+        handler.UpButton!.UpdateFont(stepper, fontManager);
+        handler.DownButton!.UpdateFont(stepper, fontManager);
     }
 
     private static void MapButtonTextColor(StepperWithInputHandler handler, StepperWithInput stepper)
@@ -149,7 +145,7 @@ public class StepperWithInputHandler : StepperHandler
 
         var textColorList = new ColorStateList(states, colors);
 
-        handler.UpButton.SetTextColor(textColorList);
-        handler.DownButton.SetTextColor(textColorList);
+        handler.UpButton!.SetTextColor(textColorList);
+        handler.DownButton!.SetTextColor(textColorList);
     }
 }

@@ -19,26 +19,17 @@
         HorizontalOptions="Center"
         VerticalOptions="Center">
         <Grid
-            ColumnDefinitions="*, 0.5*, 0.5*">
+            ColumnDefinitions="*, *">
             <Label
                 Text="Обрати місяць та рік"
                 VerticalTextAlignment="Center"/>
-            <Picker
+
+            <controls:WheelDatePicker
                 Grid.Column="1"
-                Title="Місяць"
-                ItemsSource="{Binding Months}"
-                SelectedItem="{Binding SelectedMonth}"/>
-
-            <Picker
-                Grid.Column="2"
-                Title="Рік"
-                ItemsSource="{Binding Years}"
-                SelectedItem="{Binding SelectedYear}"/>
+                Title="Місяць та рік"
+                IsDayVisible="False"
+                SelectedDate="{Binding SelectedDate}"/>
         </Grid>
-
-        <controls:WheelDatePicker
-            IsDayVisible="True"
-            SelectedDate="{Binding SelectedDate}"/>
 
         <Label
             Text="Спожито кВт/год"

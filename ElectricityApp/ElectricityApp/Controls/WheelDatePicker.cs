@@ -1,10 +1,35 @@
 ﻿using Font = Microsoft.Maui.Font;
 using IFontElement = Microsoft.Maui.Controls.Internals.IFontElement;
-// TODO: Review code: control's file
+
 namespace ElectricityApp.Controls;
 
 public class WheelDatePicker : View, ITextStyle, IFontElement
 {
+    #region ITextStyle property
+    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ITextStyle), Colors.Gray);
+    public Color TextColor
+    {
+        get => (Color)GetValue(TextColorProperty);
+        set => SetValue(TextColorProperty, value);
+    }
+
+    public Font Font => this.ToFont();
+
+    public static readonly BindableProperty CharacterSpacingProperty = InputView.CharacterSpacingProperty;
+    public double CharacterSpacing
+    {
+        get => (double)GetValue(CharacterSpacingProperty);
+        set => SetValue(CharacterSpacingProperty, value);
+    }
+    #endregion
+
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(WheelDatePicker), default);
+    public string? Title
+    {
+        get => (string?)GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
+
     public static readonly BindableProperty IsDayVisibleProperty = BindableProperty.Create(nameof(IsDayVisible), typeof(bool), typeof(WheelDatePicker), true);
     public bool IsDayVisible
     {
@@ -25,19 +50,6 @@ public class WheelDatePicker : View, ITextStyle, IFontElement
         get => (Color)GetValue(UnderlineColorProperty);
         set => SetValue(UnderlineColorProperty, value);
     }
-
-    #region ITextStyle property
-    public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(ITextStyle), Colors.Gray);
-    public Color TextColor
-    {
-        get => (Color)GetValue(TextColorProperty);
-        set => SetValue(TextColorProperty, value);
-    }
-
-    public Font Font => this.ToFont();
-
-    public double CharacterSpacing => throw new NotImplementedException();
-    #endregion
 
     #region Font Property
     public static readonly BindableProperty FontAttributesProperty = InputView.FontAttributesProperty;

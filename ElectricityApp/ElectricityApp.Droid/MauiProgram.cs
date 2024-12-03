@@ -1,6 +1,4 @@
-﻿using ElectricityApp.Controls;
-using ElectricityApp.Droid.Handlers;
-using Microsoft.Maui.Handlers;
+﻿using ElectricityApp.Droid.Handlers;
 
 namespace ElectricityApp.Droid;
 

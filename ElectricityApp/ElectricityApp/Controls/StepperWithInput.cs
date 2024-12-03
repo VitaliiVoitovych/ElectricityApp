@@ -1,6 +1,6 @@
 ﻿using Font = Microsoft.Maui.Font;
 using IFontElement = Microsoft.Maui.Controls.Internals.IFontElement;
-//TODO: Review code: control's file
+
 namespace ElectricityApp.Controls;
 
 public class StepperWithInput : Stepper, ITextStyle, IFontElement
@@ -15,7 +15,12 @@ public class StepperWithInput : Stepper, ITextStyle, IFontElement
 
     public Font Font => this.ToFont();
 
-    public double CharacterSpacing => throw new NotImplementedException();
+    public static readonly BindableProperty CharacterSpacingProperty = InputView.CharacterSpacingProperty;
+    public double CharacterSpacing
+    {
+        get => (double)GetValue(CharacterSpacingProperty);
+        set => SetValue(CharacterSpacingProperty, value);
+    }
     #endregion
 
     #region Font Property
