@@ -5,8 +5,6 @@ public partial class App : Application
     public App()
     {
         InitializeComponent();
-
-        MainPage = new AppShell();
     }
 
     protected override void OnStart()
@@ -14,5 +12,10 @@ public partial class App : Application
         UserAppTheme = AppTheme.Dark;
 
         base.OnStart();
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell());
     }
 }
