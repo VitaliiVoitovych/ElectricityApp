@@ -7,9 +7,9 @@ namespace ElectricityApp.Droid.Handlers;
 
 public class StepperWithInputHandler : StepperHandler
 {
-    protected AButton? UpButton { get; private set; }
-    protected AButton? DownButton { get; private set; }
-    protected TextInputEditText? TextField { get; private set; }
+    internal AButton? UpButton { get; private set; }
+    internal AButton? DownButton { get; private set; }
+    internal TextInputEditText? TextField { get; private set; }
     public new StepperWithInput VirtualView => (StepperWithInput)base.VirtualView;
 
     public static IPropertyMapper<IStepper, IStepperHandler> PropertyMapper = new PropertyMapper<StepperWithInput, StepperWithInputHandler>(ViewHandler.ViewMapper)

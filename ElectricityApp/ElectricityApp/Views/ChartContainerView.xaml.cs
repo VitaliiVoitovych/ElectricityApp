@@ -77,7 +77,7 @@ public partial class ChartContainerView : ContentView
 		InitializeComponent();
 		Chart.TooltipTextPaint = ChartPaints.TooltipTextPaint;
 		Chart.TooltipBackgroundPaint = ChartPaints.TooltipBackgroundPaint;
-	}
+    }
 
-	public void UpdateChart() => Chart.CoreChart.Update();
+    public void UpdateChart() => Chart.CoreChart.Update();
 }
