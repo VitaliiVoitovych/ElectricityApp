@@ -1,9 +1,6 @@
 using LiveChartsCore;
-using LiveChartsCore.Drawing;
 using LiveChartsCore.Kernel.Sketches;
 using LiveChartsCore.Measure;
-using LiveChartsCore.SkiaSharpView.Drawing;
-using ChartPaints = ElectricityApp.Services.Charting.Styles.ChartPaints;
 
 namespace ElectricityApp.Views;
 
@@ -63,20 +60,9 @@ public partial class ChartContainerView : ContentView
 		set => SetValue(LegendPositionProperty, value);
 	}
 
-	public static readonly BindableProperty LegendTextPaintProperty =
-		BindableProperty.Create(nameof(LegendTextPaint), typeof(IPaint<SkiaSharpDrawingContext>), typeof(ChartContainerView), default);
-
-	public IPaint<SkiaSharpDrawingContext> LegendTextPaint
-	{
-		get => (IPaint<SkiaSharpDrawingContext>)GetValue(LegendTextPaintProperty);
-		set => SetValue(LegendTextPaintProperty, value);
-	}
-
-    public ChartContainerView()
+	public ChartContainerView()
 	{
 		InitializeComponent();
-		Chart.TooltipTextPaint = ChartPaints.TooltipTextPaint;
-		Chart.TooltipBackgroundPaint = ChartPaints.TooltipBackgroundPaint;
     }
 
     public void UpdateChart() => Chart.CoreChart.Update();

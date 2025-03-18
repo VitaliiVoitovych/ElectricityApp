@@ -1,7 +1,6 @@
 ﻿using ElectricityApp.Services.Charting.Styles;
 using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
 
 namespace ElectricityApp.Services.Charting;
 
@@ -73,6 +72,4 @@ public class ChartsService
             LabelsPaint = ChartPaints.AxisLabelsPaint,
         }
     ];
-
-    public SolidColorPaint LegendTextPaint => ChartPaints.LegendTextPaint;
 }

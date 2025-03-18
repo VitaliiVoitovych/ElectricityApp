@@ -93,6 +93,7 @@ public partial class NotesService : ObservableObject
         var index = ObservableElectricityConsumptions.LastMatchingIndex(c => c.Date == consumption.Date);
 
         _dbContext.ElectricityConsumptions.Update(consumption.Consumption);
+        _dbContext.SaveChanges();
         ChartsService.UpdateValues(index, consumption.Consumption);
         
         UpdateAverageValues();

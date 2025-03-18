@@ -37,8 +37,7 @@
                     Series="{Binding ChartsService.KilowattConsumedSeries}"
                     XAxes="{Binding ChartsService.DateXAxes}"
                     YAxes="{Binding ChartsService.KilowattConsumedYAxes}"
-                    LegendPosition="Top"
-                    LegendTextPaint="{Binding ChartsService.LegendTextPaint}"/>
+                    LegendPosition="Top"/>
             </Grid>
         </ScrollView>
     </Grid>

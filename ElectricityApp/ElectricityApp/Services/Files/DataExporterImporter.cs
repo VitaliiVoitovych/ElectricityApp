@@ -13,7 +13,6 @@ public static class DataExporterImporter
     public static async Task<IAsyncEnumerable<ElectricityConsumption>> ImportAsync(Stream stream)
     {
         return (await JsonSerializer.DeserializeAsync<IAsyncEnumerable<ElectricityConsumption>>(stream, Options))!;
-        // return JsonSerializer.DeserializeAsyncEnumerable<ElectricityConsumption>(stream, Options);
     }
 
     public static async Task ExportAsync<T>(string path, IEnumerable<T> collection)

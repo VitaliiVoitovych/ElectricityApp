@@ -4,15 +4,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmolels="clr-namespace:ElectricityApp.ViewModels"
              xmlns:controls="clr-namespace:ElectricityApp.Controls"
-             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="ElectricityApp.Pages.EditPage"
              x:DataType="viewmolels:EditViewModel"
              Shell.PresentationMode="ModalAnimated">
-    <ContentPage.Behaviors>
-        <toolkit:StatusBarBehavior 
-            StatusBarColor="{StaticResource DarkGreen}" 
-            StatusBarStyle="LightContent"/>
-    </ContentPage.Behaviors>
     
     <VerticalStackLayout
         HorizontalOptions="Center"
