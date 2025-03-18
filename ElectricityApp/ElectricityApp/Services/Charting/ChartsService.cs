@@ -36,6 +36,13 @@ public class ChartsService
         _amountsToPayValues.RemoveAt(index);
     }
 
+    public void UpdateValues(int index, ElectricityConsumption consumption)
+    {
+        _dayKilowattConsumed[index] = consumption.DayKilowattConsumed;
+        _nightKilowattConsumed[index] = consumption.NightKilowattConsumed;
+        _amountsToPayValues[index] = consumption.AmountToPay;
+    }
+    
     public IEnumerable<ISeries> AmountsToPaySeries =>
     [
         ChartUtils.CreateLineSeries(_amountsToPayValues, ChartColors.AmountToPaySeriesColor),

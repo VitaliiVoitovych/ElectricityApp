@@ -12,14 +12,17 @@ public partial class NotesService : ObservableObject
     private readonly ChartsService _chartsService;
 
     public ChartsService ChartsService => _chartsService;
-    public ObservableCollection<ElectricityConsumption> ElectricityConsumptions { get; }
+    public ObservableCollection<ObservableElectricityConsumption> ObservableElectricityConsumptions { get; }
 
+    public List<ElectricityConsumption> ElectricityConsumptions =>
+        ObservableElectricityConsumptions.Select(c => c.Consumption).ToList();
+    
     [ObservableProperty] private decimal _averageAmount;
     [ObservableProperty] private double _averageKilowattConsumed;
 
     public NotesService(ElectricityDbContext dbContext, ChartsService chartsService)
     {
-        ElectricityConsumptions = [];
+        ObservableElectricityConsumptions = [];
         _dbContext = dbContext;
         _chartsService = chartsService;
         Task.Run(LoadDataAsync);
@@ -31,7 +34,7 @@ public partial class NotesService : ObservableObject
         
         foreach (var consumption in electricityConsumption)
         {
-            ElectricityConsumptions.Add(consumption);
+            ObservableElectricityConsumptions.Add(new ObservableElectricityConsumption(consumption));
             ChartsService.AddValues(consumption);
         }
 
@@ -44,13 +47,13 @@ public partial class NotesService : ObservableObject
 
         await foreach (var consumption in data)
         {
-            AddNote(consumption);
+            AddNote(new ObservableElectricityConsumption(consumption));
         }
     }
 
     public void Clear()
     {
-        var electricityConsumptions = ElectricityConsumptions.ToList();
+        var electricityConsumptions = ObservableElectricityConsumptions.ToList();
 
         foreach (var consumption in electricityConsumptions)
         {
@@ -58,41 +61,51 @@ public partial class NotesService : ObservableObject
         }
     }
 
-    public void AddNote(ElectricityConsumption consumption)
+    public void AddNote(ObservableElectricityConsumption consumption)
     {
-        DuplicateConsumptionNoteException.ThrowIfDuplicateExists(ElectricityConsumptions, consumption);
+        DuplicateConsumptionNoteException.ThrowIfDuplicateExists(ElectricityConsumptions, consumption.Consumption);
 
-        var index = ElectricityConsumptions.LastMatchingIndex(c => c.Date < consumption.Date) + 1;
+        var index = ObservableElectricityConsumptions.LastMatchingIndex(c => c.Date < consumption.Date) + 1;
 
-        ElectricityConsumptions.Insert(index, consumption);
-        ChartsService.AddValues(index, consumption);
+        ObservableElectricityConsumptions.Insert(index, consumption);
+        ChartsService.AddValues(index, consumption.Consumption);
 
-        _dbContext.ElectricityConsumptions.Add(consumption);
+        _dbContext.ElectricityConsumptions.Add(consumption.Consumption);
         _dbContext.SaveChanges();
 
         UpdateAverageValues();
     }
 
-    public void RemoveNote(ElectricityConsumption consumption)
+    public void RemoveNote(ObservableElectricityConsumption consumption)
     {
-        var index = ElectricityConsumptions.IndexOf(consumption);
-        ElectricityConsumptions.RemoveAt(index);
+        var index = ObservableElectricityConsumptions.IndexOf(consumption);
+        ObservableElectricityConsumptions.RemoveAt(index);
         ChartsService.RemoveValues(index);
 
-        _dbContext.ElectricityConsumptions.Remove(consumption);
+        _dbContext.ElectricityConsumptions.Remove(consumption.Consumption);
         _dbContext.SaveChanges();
 
         UpdateAverageValues();
     }
 
+    public void UpdateNote(ObservableElectricityConsumption consumption)
+    {
+        var index = ObservableElectricityConsumptions.LastMatchingIndex(c => c.Date == consumption.Date);
+
+        _dbContext.ElectricityConsumptions.Update(consumption.Consumption);
+        ChartsService.UpdateValues(index, consumption.Consumption);
+        
+        UpdateAverageValues();
+    }
+    
     private void UpdateAverageValues()
     {
-        AverageAmount = ElectricityConsumptions.Count > 0 
-            ? ElectricityConsumptions.Average(e => e.AmountToPay) 
+        AverageAmount = ObservableElectricityConsumptions.Count > 0 
+            ? ObservableElectricityConsumptions.Average(e => e.AmountToPay) 
             : 0.0m;
 
-        AverageKilowattConsumed = ElectricityConsumptions.Count > 0 
-            ? ElectricityConsumptions.Average(e => e.DayKilowattConsumed + e.NightKilowattConsumed) 
+        AverageKilowattConsumed = ObservableElectricityConsumptions.Count > 0 
+            ? ObservableElectricityConsumptions.Average(e => e.DayKilowattConsumed + e.NightKilowattConsumed) 
             : 0.0;
 
     }

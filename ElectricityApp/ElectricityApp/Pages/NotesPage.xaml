@@ -30,7 +30,7 @@
         Margin="15,7,15,0">
 
         <CollectionView
-            ItemsSource="{Binding NotesService.ElectricityConsumptions}">
+            ItemsSource="{Binding NotesService.ObservableElectricityConsumptions}">
 
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout
@@ -38,8 +38,15 @@
                     ItemSpacing="12"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:ElectricityConsumption">
+                <DataTemplate x:DataType="models:ObservableElectricityConsumption">
                     <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItem
+                                IconImageSource="edit.png"
+                                BackgroundColor="Transparent"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:NotesViewModel}, AncestorLevel=1}, Path=EditCommand, x:DataType=viewmodels:NotesViewModel}"
+                                CommandParameter="{Binding .}"/>
+                        </SwipeView.LeftItems>
                         <SwipeView.RightItems>
                             <SwipeItem
                                 IconImageSource="cross.png"
