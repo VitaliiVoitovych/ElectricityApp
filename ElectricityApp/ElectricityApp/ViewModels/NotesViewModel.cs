@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Maui.Views;
-using ElectricityApp.Services.Files;
-using ElectricityApp.Views.Popups;
+﻿using ElectricityApp.Services.Files;
 using System.Text.Json;
 
 namespace ElectricityApp.ViewModels;
@@ -13,12 +11,6 @@ public partial class NotesViewModel(NotesService notesService, FileService fileS
     private void Remove(ElectricityConsumption consumption)
     {
         NotesService.RemoveNote(consumption);
-    }
-
-    [RelayCommand]
-    private async Task ShowQrCodePopup()
-    {
-        await Shell.Current.ShowPopupAsync(Popups.ShareAppQrCodePopup);
     }
 
     [RelayCommand]
