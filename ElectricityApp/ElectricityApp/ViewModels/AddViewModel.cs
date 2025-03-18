@@ -19,7 +19,7 @@ public partial class AddViewModel(NotesService notesService) : ObservableObject
         try
         {
             InvalidConsumptionDataException.ThrowIfDateInvalid(consumption);
-            notesService.AddNote(consumption);
+            notesService.AddNote(new ObservableElectricityConsumption(consumption));
             UpdateDate();
         }
         catch (DuplicateConsumptionNoteException)
